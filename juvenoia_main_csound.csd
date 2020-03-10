@@ -112,13 +112,13 @@ instr arduino_serial
     kpot2 port kpot2, 0.01 
     ksoftpot port ksoftpot, 0.01   
 
-gkpot1 = kpot1
-gkpot2 = kpot2
-gkbutton1 = kbutton1
-gkbutton2 = kbutton2
-gksoftpot = ksoftpot
+    gkpot1 = kpot1
+    gkpot2 = kpot2
+    gkbutton1 = kbutton1
+    gkbutton2 = kbutton2
+    gksoftpot = ksoftpot
 
-printk2 ksoftpot
+    printk2 ksoftpot
 
     continue:
 
@@ -219,14 +219,13 @@ instr message
     koldsample init 0
         
     if ktrig2 == 1 then
-        
-        ksample random 1, 6
+        randomise:
+        ksample random 1, 6.9999
         ksample = int(ksample)
         if(ksample != koldsample) then
             event "i", "samples", 0, 9, ksample
         else
-            ksample += 1
-            event "i", "samples", 0, 9, ksample
+            kgoto randomise
         endif
         
         koldsample = ksample
@@ -286,7 +285,7 @@ instr samples
     endif
     
     arevl, arevr reverbsc asigl, asigr, 0.5, 10000
-    outs arevl*0.9, arevr*0.9
+    outs arevl*0.9  , arevr*0.9
     
 endin
 
@@ -506,20 +505,20 @@ endin
 
 instr mixer
 
-krmssaw1 rms gasaw1
-krmssaw2 rms gasaw2
+    krmssaw1 rms gasaw1
+    krmssaw2 rms gasaw2
 
-ksaw1pan chnget "saw1pan"
-ksaw2pan chnget "saw2pan"
+    ksaw1pan chnget "saw1pan"
+    ksaw2pan chnget "saw2pan"
 
-chnset krmssaw1, "saw1"
-chnset krmssaw2, "saw2"
+    chnset krmssaw1, "saw1"
+    chnset krmssaw2, "saw2"
 
-outs ((gasaw1*(1-ksaw1pan)) + (gasaw2*(1-ksaw2pan)) + (gasub*0.2))*0.3, ((gasaw1*ksaw1pan) + (gasaw2*ksaw2pan) + (gasub*0.2))*0.3
+    outs ((gasaw1*(1-ksaw1pan)) + (gasaw2*(1-ksaw2pan)) + (gasub*0.2))*0.3, ((gasaw1*ksaw1pan) + (gasaw2*ksaw2pan) + (gasub*0.2))*0.3
 
-amaster = gasaw1 + gasaw2
-kmasterrms rms amaster
-chnset kmasterrms, "master"
+    amaster = gasaw1 + gasaw2
+    kmasterrms rms amaster
+    chnset kmasterrms, "master"
 
 endin
 
