@@ -4,6 +4,8 @@ Find a way for the second button to play a DIFFERENT sample each time
 Re-implement the pvsanal tape player boi
 Add in the phone ringing boi
 */
+<Cabbage>
+form caption("JUVENOIA") size(400, 300) colour(50, 50, 50)
 rslider channel("pitch") range(20, 500, 100, 1, 1) bounds(100, 0, 50, 50) text("Pitch")
 rslider channel("saw1pan") range(0, 1, 0.5, 1, 0.01) text("Saw 1 Pan") bounds(150, 0, 50, 50) 
 rslider channel("saw2pan") range(0, 1, 0.5, 1, 0.01) text("Saw 2 Pan") bounds(200, 0, 50, 50) 

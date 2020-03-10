@@ -5,10 +5,7 @@ instr message
     kcabbagebutton2 chnget "trigger2"
     ktrig trigger kcabbagebutton, 0, 0
     ktrig2 trigger kcabbagebutton2, 0, 0
-    
-    kkicklength = 32
-    kelapsed init 0
-    kbeat init 0
+
     klength random 0.5, 2  
     ktime init 0  
     ktable random 0, 3

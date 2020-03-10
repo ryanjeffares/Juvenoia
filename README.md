@@ -6,6 +6,4 @@ The piece has roots in serialism and electroacoustic music, and is algorithmical
 
 Juvenoia, the exaggerated (and futile) fear of the effects of social change on youth, is shown through the juxtaposition of old fashioned aesthetics and avant-garde music composed with computer code. The user is the median through which the music and the environment communicate, acting as a bridge between the generational gap.
 
-The parts of the installation examined in this project include how detuning drones and physical modelling synths serve as thematically influenced instrument choices, how interaction is processed with the Arduino, and how MIDI controlled visuals create a multi-sensual experience.
-
 The results of parents’ Juvenoia indisputably affects young peoples’ self confidence and self image. Attention should be drawn to the fact that it is not something to be taken personally, but occurs as an extant part of life.
