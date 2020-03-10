@@ -215,12 +215,21 @@ instr message
     ktime = 0    
     
     endif 
-    
+        
+    koldsample init 0
+        
     if ktrig2 == 1 then
         
         ksample random 1, 6
         ksample = int(ksample)
-        event "i", "samples", 0, 9, ksample
+        if(ksample != koldsample) then
+            event "i", "samples", 0, 9, ksample
+        else
+            ksample += 1
+            event "i", "samples", 0, 9, ksample
+        endif
+        
+        koldsample = ksample
     
     endif 
     
@@ -277,7 +286,7 @@ instr samples
     endif
     
     arevl, arevr reverbsc asigl, asigr, 0.5, 10000
-    outs arevl*0.7, arevr*0.7
+    outs arevl*0.9, arevr*0.9
     
 endin
 
