@@ -20,7 +20,7 @@ vmeter bounds(110, 50, 35, 198) channel("master") value(0) overlaycolour(70, 53,
 
 ;label bounds(60, 250, 100, 50) identchannel("masterIdent")
 </Cabbage>
- <CsoundSynthesizer>
+<CsoundSynthesizer>
 <CsOptions>
 -n -d -+rtmidi=NULL -M0 -m0d --midi-key-cps=4 --midi-velocity-amp=5 -j8
 </CsOptions>
@@ -65,7 +65,6 @@ instr globals    ;initialising global variables
     gkcnt	init	0
     
 endin 
-
 
 #include "ORCs/arduino.orc"
 
@@ -114,20 +113,21 @@ endin
 
 instr mixer
 
-krmssaw1 rms gasaw1
-krmssaw2 rms gasaw2
+    krmssaw1 rms gasaw1
+    krmssaw2 rms gasaw2
 
-ksaw1pan chnget "saw1pan"
-ksaw2pan chnget "saw2pan"
+    ksaw1pan chnget "saw1pan"
+    ksaw2pan chnget "saw2pan"
 
-chnset krmssaw1, "saw1"
-chnset krmssaw2, "saw2"
+    chnset krmssaw1, "saw1"
+    chnset krmssaw2, "saw2"
 
-outs ((gasaw1*(1-ksaw1pan)) + (gasaw2*(1-ksaw2pan)) + (gasub*0.2))*0.3, ((gasaw1*ksaw1pan) + (gasaw2*ksaw2pan) + (gasub*0.2))*0.3
+    outs ((gasaw1*(1-ksaw1pan)) + (gasaw2*(1-ksaw2pan)) + (gasub*0.2))*0.3, ((gasaw1*ksaw1pan) + (gasaw2*ksaw2pan) + (gasub*0.2))*0.3
 
-amaster = gasaw1 + gasaw2
-kmasterrms rms amaster
-chnset kmasterrms, "master"
+    amaster = gasaw1 + gasaw2
+    kmasterrms rms amaster
+    chnset kmasterrms, "master"
+
 
 endin
 
@@ -159,3 +159,4 @@ f5	0	12	-2	65	61	60	67	70	63	64	66	71	62	69	68
 </bsbPanel>
 <bsbPresets>
 </bsbPresets>
+</CsoundSynthesizer>
