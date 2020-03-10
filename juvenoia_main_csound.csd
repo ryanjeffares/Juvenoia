@@ -4,8 +4,6 @@ Find a way for the second button to play a DIFFERENT sample each time
 Re-implement the pvsanal tape player boi
 Add in the phone ringing boi
 */
-<Cabbage>
-form caption("Untitled") size(400, 300), colour("yellow"), pluginid("def1")
 rslider channel("pitch") range(20, 500, 100, 1, 1) bounds(100, 0, 50, 50) text("Pitch")
 rslider channel("saw1pan") range(0, 1, 0.5, 1, 0.01) text("Saw 1 Pan") bounds(150, 0, 50, 50) 
 rslider channel("saw2pan") range(0, 1, 0.5, 1, 0.01) text("Saw 2 Pan") bounds(200, 0, 50, 50) 
@@ -142,21 +140,4 @@ f4 0 7 -2 60 62 64 65 67 69 71
 f5	0	12	-2	65	61	60	67	70	63	64	66	71	62	69	68
 </CsScore>
 </CsoundSynthesizer>
-<bsbPanel>
- <label>Widgets</label>
- <objectName/>
- <x>100</x>
- <y>100</y>
- <width>320</width>
- <height>240</height>
- <visible>true</visible>
- <uuid/>
- <bgcolor mode="nobackground">
-  <r>255</r>
-  <g>255</g>
-  <b>255</b>
- </bgcolor>
-</bsbPanel>
-<bsbPresets>
-</bsbPresets>
 </CsoundSynthesizer>
