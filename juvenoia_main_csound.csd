@@ -3,6 +3,8 @@ Optimise the Sub
 Find a way for the second button to play a DIFFERENT sample each time
 Re-implement the pvsanal tape player boi
 Add in the phone ringing boi
+Fix delay instrument
+Add more samples, maybe PVS them?
 */
 <Cabbage>
 form caption("JUVENOIA") size(400, 300) colour(50, 50, 50)
