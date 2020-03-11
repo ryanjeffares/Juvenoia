@@ -8,6 +8,10 @@ instr sub
     kfreq += klfo
     kfreq += gksoftpot
 
+    if(kfreq < 20) then
+        kfreq = 20
+    endif
+    
     kpw lfo 0.4, 0.4
     kpw += 0.5
     asig vco2 0.5, kfreq, 2, kpw
