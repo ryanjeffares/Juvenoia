@@ -38,7 +38,7 @@ alwayson "sub"
 alwayson "message"
 
 alwayson	"reverb"
-alwayson	"delay"
+;alwayson	"delay"
 alwayson "chord_start"
 alwayson "noise_start"
 
@@ -81,7 +81,7 @@ endin
 #include "ORCs/chords.orc"
 
 #include "ORCs/noise.orc"
-
+/*
 instr delay
 
 	ktime	rspline	0.1,	3,	1,	20
@@ -100,7 +100,7 @@ instr delay
 	gaverbR	=	asig
 
 endin
-
+*/
 instr reverb
 
 	averbL,	averbR	reverbsc	gaverbL,	gaverbR,	0.99,	800
