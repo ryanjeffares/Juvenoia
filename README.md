@@ -1,8 +1,8 @@
 # Juvenoia
 
-![Header Image](/Image.jpg)
-
 This project is an interactive, audiovisual installation addressing the theme of Juvenoia. The piece illustrates how cross-generational harmony is achievable via the use of old technology in a modern context, along with the ambiguity in the period of the set. It highlights that Juvenoia is not a new concept, but is a phenomenon that has been happening for generations.
+
+![Header Image](/Image.jpg)
 
 The piece has roots in serialism and electroacoustic music, and is algorithmically composed by a programming language called Csound running on a 2001 PowerMac. The computer analyses input taken from various sensors placed around the room and uses them to influence the notes it is generating, the sounds it is making, and the visuals it is displaying.
 
