@@ -58,6 +58,10 @@ instr globals    ;initialising global variables
 
     kfiltlfo lfo 200, 0.1
     gkcutoff += kfiltlfo
+    
+    if(gkcutoff < 20) then
+        gkcutoff = 20
+    endif    
 
     gaverbL	init	0
     gaverbR	init	0    
