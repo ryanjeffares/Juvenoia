@@ -31,12 +31,10 @@ instr noisey
 
 	asig	atone	asig,	80
 
-	apanL,	apanR	pan2	asig,	ipan
+	ganoiseL,	ganoiseR    pan2	asig,	ipan
 
-		outs	apanL,	apanR
-
-	gaverbL	=	apanL*2
-	gaverbR	=	apanR*2
+	gaverbL	=	ganoiseL*2
+	gaverbR	=	ganoiseR*2
 	
 endin
 
