@@ -7,7 +7,7 @@ instr arduino_serial
     kbutton1    init 0
     kbutton2    init 0
     ksoftpot    init 0
-
+/*
     iPort	    serialBegin "/dev/cu.usbmodem142101", 9600	;connect to the arduino with baudrate = 9600
                 serialWrite iPort, 1		;Triggering the Arduino (k-rate)
 
@@ -44,7 +44,7 @@ instr arduino_serial
     kpot1  port kpot1, 0.01
     kpot2 port kpot2, 0.01 
     ksoftpot port ksoftpot, 0.01   
-
+*/
 gkpot1 = 100
 
 gkpot2 = 100
