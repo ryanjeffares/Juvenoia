@@ -1,5 +1,5 @@
 
-instr arduino_serial
+instr arduino_serial2
 
     ; Initialize the three variables read
     kpot1       init 0
@@ -45,17 +45,16 @@ instr arduino_serial
     kpot2 port kpot2, 0.01 
     ksoftpot port ksoftpot, 0.01   
 */
-gkpot1 = 100
+gkpot1 = gkpitch
 
-gkpot2 = 100
+gkpot2	chnget	"cutoff"
 
-gkbutton1 = 0
+gkbutton1	chnget	"trigger"
 
-gkbutton2 = 0
+gkbutton2	chnget	"trigger2"
 
 gksoftpot = 0
 
-    continue:
 
 endin
 

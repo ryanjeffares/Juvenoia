@@ -19,6 +19,7 @@ button bounds(200, 50, 50, 50) channel("trigger2")
 vmeter bounds(0, 50, 35, 198) channel("masterl") value(0) overlaycolour(70, 53, 53, 255) metercolour:0(0, 255, 0, 255) metercolour:1(0, 103, 171, 255) metercolour:2(23, 0, 123, 255) outlinethickness(4)
 vmeter bounds(35, 50, 35, 198) channel("masterr") value(0) overlaycolour(70, 53, 53, 255) metercolour:0(0, 255, 0, 255) metercolour:1(0, 103, 171, 255) metercolour:2(23, 0, 123, 255) outlinethickness(4)
 
+checkbox bounds(8, 254, 185, 38) text("Arduino? (Green = Yes)") shape("circle") channel("duinocheck")
 </Cabbage>
 <CsoundSynthesizer>
 <CsOptions>
@@ -30,17 +31,16 @@ ksmps = 512     ;arduino needs a high k rate to send over all sensor values
 nchnls = 2
 0dbfs = 1
 
-alwayson "arduino_serial"
 alwayson "saw1"
 alwayson "saw2"
 alwayson "mixer"
 alwayson "sub"
 alwayson "message"
-alwayson "start_notes"
+;alwayson "start_notes"
 alwayson	"reverb"
 ;alwayson	"delay"
-alwayson "chord_start"
-alwayson "noise_start"
+;alwayson "chord_start"
+;alwayson "noise_start"
 
 
 instr globals    ;initialising global variables
@@ -74,12 +74,50 @@ instr globals    ;initialising global variables
     ganoiseR init 0
     
     gasamplesL init 0
-    gasamplesR init 0
+    gasamplesR init 
     
-endin 
+    gkduinocheck chnget "duinocheck"
+    gkon    init    0
+    
+endin
+
+;delaying button check
+
+instr butdelay
+
+    gkon    =  1
+
+endin
 
 #include "ORCs/arduino.orc"
+#include "ORCs/sansduino.orc"
 
+
+while (gkon  !=  2) do
+   
+    if  (gkon    ==  1   &&  gkduinocheck    ==  1)  then
+    
+        goto duiyes
+        
+    elseif  (gkon    ==  1   &&  gkduinocheck ==  0)  then
+    
+        goto duino
+    
+    endif
+
+od
+
+    duiyes:
+    gkon =  2
+alwayson "arduino_serial"
+
+    goto    continue
+  
+    duino:
+    gkon =  2
+alwayson "arduino_serial2"  
+
+    continue:
 #include "ORCs/sub.orc"
 
 #include "ORCs/saws.orc"
@@ -145,6 +183,7 @@ endin
 <CsScore>
 ;causes Csound to run for about 7000 years...
 i "globals" 0 z
+i   "butdelay"  3  1
 f1 0 16384 10 1
 f2 0 16384 10 1 0.5 0.3 0.25 0.2 0.167 0.14 0.125 .111
 f3 0 16384 10 1 0 0.3 0 0.2 0 0.14 0 .111

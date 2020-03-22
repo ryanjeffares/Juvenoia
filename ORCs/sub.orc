@@ -17,7 +17,7 @@ instr sub
     asig vco2 0.5, kfreq, 2, kpw
     adel oscil 0.1, 0.1
     aflange flanger asig, adel, 0.4
-    gasub lpf18 aflange, gkcutoff, 0.5, 0.5
-
+   ; gasub lpf18 aflange, gkcutoff, 0.5, 0.5
+gasub = aflange
 endin
 
