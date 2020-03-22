@@ -4,7 +4,7 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
--odac -j2
+-j2 ;-odac
 </CsOptions>
 <CsInstruments>
 
@@ -66,7 +66,7 @@ endin
 
 #include "ORCs/saws.orc"
 
-#include "ORCs/message.orc"
+;#include "ORCs/message.orc"
 
 #include "ORCs/samples.orc"
 
@@ -126,7 +126,7 @@ endin
 </CsInstruments>
 <CsScore>
 ;causes Csound to run for about 7000 years...
-i "globals" 0 z
+i "globals" 0 200
 f1 0 16384 10 1
 f2 0 16384 10 1 0.5 0.3 0.25 0.2 0.167 0.14 0.125 .111
 f3 0 16384 10 1 0 0.3 0 0.2 0 0.14 0 .111

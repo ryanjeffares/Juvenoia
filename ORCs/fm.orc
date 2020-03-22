@@ -40,7 +40,7 @@ instr start_notes
 
 		;printk2	kmidi,	10
 		kcnt	=	kcnt+1
-		schedkwhen	ktrig,	0,	0,	"fm",	0,	4,	kfreq,	kpan
+		schedkwhennamed	ktrig,	0,	0,	"fm",	0,	4,	kfreq,	kpan
 
 	endif
 
