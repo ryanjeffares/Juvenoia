@@ -4,26 +4,14 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
--j2 ;-odac
+-j2 -odac
 </CsOptions>
 <CsInstruments>
 
-ksmps = 512     ;arduino needs a high k rate to send over all sensor values
+sr	=	44100
+ksmps = 4096    ;arduino needs a high k rate to send over all sensor values
 nchnls = 2
 0dbfs = 1
-
-alwayson "arduino_serial"
-alwayson "saw1"
-alwayson "saw2"
-alwayson "mixer"
-alwayson "sub"
-alwayson "message"
-alwayson "start_notes"
-alwayson	"reverb"
-;alwayson	"delay"
-alwayson "chord_start"
-alwayson "noise_start"
-
 
 instr globals    ;initialising global variables
 
@@ -35,8 +23,8 @@ instr globals    ;initialising global variables
 
     gasaw1 init 0
     gasaw2 init 0 
-    gkpitch chnget "pitch"
-    gkcutoff = gkpot2*8
+    gkpitch  init	100
+    gkcutoff =	gkpot2*8
 
     kfiltlfo lfo 200, 0.1
     gkcutoff += kfiltlfo
@@ -60,7 +48,7 @@ instr globals    ;initialising global variables
     
 endin 
 
-#include "ORCs/sansduino.orc"
+#include "ORCs/ardnocabbage.orc"
 
 #include "ORCs/sub.orc"
 
@@ -75,6 +63,21 @@ endin
 #include "ORCs/chords.orc"
 
 #include "ORCs/noise.orc"
+
+alwayson "globals"
+alwayson "arduino_serial"
+alwayson "saw1"
+alwayson "saw2"
+alwayson "mixer"
+alwayson "sub"
+alwayson "message"
+alwayson "start_notes"
+alwayson	"reverb"
+;alwayson	"delay"
+alwayson "chord_start"
+alwayson "noise_start"
+
+
 
 /*
 instr delay
@@ -126,12 +129,13 @@ endin
 </CsInstruments>
 <CsScore>
 ;causes Csound to run for about 7000 years...
-i "globals" 0 200
+;i "globals" 0 200
+
+f0 z
 f1 0 16384 10 1
 f2 0 16384 10 1 0.5 0.3 0.25 0.2 0.167 0.14 0.125 .111
 f3 0 16384 10 1 0 0.3 0 0.2 0 0.14 0 .111
 f4 0 7 -2 60 62 64 65 67 69 71
 f5 0 12	-2 65 61 60	67 70 63 64	66 71 62 69	68
 </CsScore>
-</CsoundSynthesizer>
 </CsoundSynthesizer>
