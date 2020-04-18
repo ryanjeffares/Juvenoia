@@ -2,6 +2,7 @@
 
 <b>NOTE:
   This project has been split into two branches and the collaborative element reduced. This is due to the COVID-19 situation.
+
 Updates will be posted as time goes on.</b>
 
 This project is an interactive, audiovisual installation addressing the theme of Juvenoia. The piece illustrates how cross-generational harmony is achievable via the use of old technology in a modern context, along with the ambiguity in the period of the set. It highlights that Juvenoia is not a new concept, but is a phenomenon that has been happening for generations.
