@@ -4,7 +4,7 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
--j2 -odac
+-j8 -odac
 </CsOptions>
 <CsInstruments>
 
@@ -58,7 +58,7 @@ endin
 
 #include "ORCs/samples.orc"
 
-#include "ORCs/fm.orc"
+#include "ORCs/mandol.orc"
 
 #include "ORCs/chords.orc"
 
@@ -66,10 +66,10 @@ endin
 
 alwayson "globals"
 alwayson "arduino_serial"
-alwayson "saw1"
-alwayson "saw2"
+;alwayson "saw1"
+;alwayson "saw2"
 alwayson "mixer"
-alwayson "sub"
+;alwayson "sub"
 alwayson "message"
 alwayson "start_notes"
 alwayson	"reverb"
@@ -137,5 +137,6 @@ f2 0 16384 10 1 0.5 0.3 0.25 0.2 0.167 0.14 0.125 .111
 f3 0 16384 10 1 0 0.3 0 0.2 0 0.14 0 .111
 f4 0 7 -2 60 62 64 65 67 69 71
 f5 0 12	-2 65 61 60	67 70 63 64	66 71 62 69	68
+f6 0 8192 1 "Samples/mandpluk.aiff" 0 0 0
 </CsScore>
 </CsoundSynthesizer>
