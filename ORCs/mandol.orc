@@ -40,7 +40,7 @@ instr start_notes
 
 		;printk2	kmidi,	10
 		kcnt	=	kcnt+1
-		schedkwhennamed	ktrig,	0,	0,	"fm",	0,	4,	kfreq,	kpan
+		schedkwhennamed	ktrig,	0,	0,	"mando",	0,	4,	kfreq,	kpan
 
 	endif
 
@@ -48,7 +48,7 @@ endin
 
 
 
-instr fm
+instr mando
 
 	idur	=	p3
 	ifreq	=	p4
@@ -56,21 +56,17 @@ instr fm
 	ipan	=	p5
 
 	kenv	madsr	0.01,	1,	0.01,	idur
-	asig1	vco2	kenv,	ifreq*2,	12
-	asig2	vco2	kenv,	ifreq*1.34,	12
 
-	asig	=	asig1	*	asig2
+	asig	mandol	0.9,	k(ifreq),   0.4,	0.9,	1,	1,	6
 
-
-	afilt	lpf18	asig,	4000*kenv,	.2,	.8
-
-	afilt2	atone	afilt,	100
+	afilt2	atone	asig,	100
 
 	gafmL,	gafmR   pan2	afilt2,	ipan
 	
-	gafmL *= 0.25
-	gafmR *= 0.25
-
+/*
+	gafmL *= 0.8
+	gafmR *= 0.8
+*/
 			;outs	apanL*0.25,	apanR*0.25
 
 
