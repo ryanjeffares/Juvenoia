@@ -17,8 +17,7 @@ instr samples
         asigl, asigr diskin "Samples/Sample6.wav"        
     endif
     
-    arevl, arevr reverbsc asigl, asigr, 0.5, 10000
-    outs arevl*0.9, arevr*0.9
+    gasamplesL, gasamplesR reverbsc asigl, asigr, 0.5, 10000    
     
 endin
 

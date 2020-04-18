@@ -59,13 +59,13 @@ instr glass
 	kvdepth	=	p9
 	kvrate	=	p10
 
-    	asig fmbell iamp, ifreq, kc1, kc2, kvdepth, kvrate
+    	asig fmbell iamp, ifreq*6, kc1, kc2, kvdepth, kvrate
 ;asig fmbell iamp, ifreq, 3, 6, 0.2, 10
 
 
 	asig	atone	asig,	200
 
-	asig	*=	.01
+	asig	*=	.1
 
 	apanL,	apanR	pan2	asig,	ipan
 

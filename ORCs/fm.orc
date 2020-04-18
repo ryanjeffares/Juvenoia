@@ -1,8 +1,10 @@
 instr start_notes
 
-	if(gkcnt>11)	then
+    kcnt	init	0
+    
+	if(kcnt>11)	then
 
-		gkcnt	=	0
+		kcnt	=	0
 	
 	endif	
 
@@ -17,7 +19,7 @@ instr start_notes
 	kpan	rspline	0,	1,	0.1,	2
 					;pgs 264, 265
 
-	kfreq	table	gkcnt,	5
+	kfreq	table	kcnt,	5
 
 	kfreq	=	cpspch(koct+kfreq)
 
@@ -34,11 +36,11 @@ instr start_notes
 	;--------------------END---------------------
 	
 
-	if(gkcnt>=0)	then
+	if(kcnt>=0)	then
 
 		;printk2	kmidi,	10
-		gkcnt	=	gkcnt+1
-		schedkwhen	ktrig,	0,	0,	"fm",	0,	.5,	kfreq,	kpan
+		kcnt	=	kcnt+1
+		schedkwhennamed	ktrig,	0,	0,	"fm",	0,	4,	kfreq,	kpan
 
 	endif
 
@@ -53,7 +55,7 @@ instr fm
 	;ifreq	=	440
 	ipan	=	p5
 
-	kenv	madsr	0.01,	idur*2,	.5,	4
+	kenv	madsr	0.01,	1,	0.01,	idur
 	asig1	vco2	kenv,	ifreq*2,	12
 	asig2	vco2	kenv,	ifreq*1.34,	12
 
@@ -62,14 +64,18 @@ instr fm
 
 	afilt	lpf18	asig,	4000*kenv,	.2,	.8
 
-	afilt	atone	afilt,	100
+	afilt2	atone	afilt,	100
 
-	apanL,	apanR	pan2	afilt,	ipan
+	gafmL,	gafmR   pan2	afilt2,	ipan
+	
+	gafmL *= 0.25
+	gafmR *= 0.25
 
-			outs	apanL*.1,	apanR*.1
+			;outs	apanL*0.25,	apanR*0.25
 
 
-	gaverbL	=	apanL
-	gaverbR	=	apanR
+	gaverbL	=	gafmL
+	gaverbR	=	gafmR
+
 endin
 

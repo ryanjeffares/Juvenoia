@@ -1,5 +1,5 @@
 
-instr arduino_serial
+instr arduino_serial2
 
     ; Initialize the three variables read
     kpot1       init 0
@@ -7,7 +7,7 @@ instr arduino_serial
     kbutton1    init 0
     kbutton2    init 0
     ksoftpot    init 0
-
+/*
     iPort	    serialBegin "/dev/cu.usbmodem142101", 9600	;connect to the arduino with baudrate = 9600
                 serialWrite iPort, 1		;Triggering the Arduino (k-rate)
 
@@ -44,14 +44,17 @@ instr arduino_serial
     kpot1  port kpot1, 0.01
     kpot2 port kpot2, 0.01 
     ksoftpot port ksoftpot, 0.01   
+*/
+gkpot1 = gkpitch
 
-gkpot1 = kpot1
-gkpot2 = kpot2
-gkbutton1 = kbutton1
-gkbutton2 = kbutton2
-gksoftpot = ksoftpot
+; set to initial values of cabbage channels
 
-    continue:
+gkpot2	=	500
+
+gkbutton1	=	0
+gkbutton2	=	0
+gksoftpot = 0
+
 
 endin
 
