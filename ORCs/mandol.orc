@@ -54,10 +54,12 @@ instr mando
 	ifreq	=	p4
 	;ifreq	=	440
 	ipan	=	p5
+;	itable	ftgen	7, 0, 8192, 1, "Samples/mandpluk.aiff", 0, 0, 0
+	
 
 	kenv	madsr	0.01,	1,	0.01,	idur
 
-	asig	mandol	0.9,	k(ifreq),   0.4,	0.9,	1,	1,	6
+	asig	mandol	0.9,	k(ifreq),   0.4,	0.9,	1,	1,	2
 
 	afilt2	atone	asig,	100
 

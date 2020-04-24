@@ -4,14 +4,16 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
--j2 -odac
+-j2 ;-odac
 </CsOptions>
 <CsInstruments>
 
 sr	=	44100
-ksmps = 4096    ;arduino needs a high k rate to send over all sensor values
+ksmps =  1024   ;arduino needs a high k rate to send over all sensor values
 nchnls = 2
 0dbfs = 1
+
+seed	0	;ensures random values are different each time by getting a seed from CPU
 
 instr globals    ;initialising global variables
 
@@ -54,7 +56,7 @@ endin
 
 #include "ORCs/saws.orc"
 
-;#include "ORCs/message.orc"
+#include "ORCs/message.orc"
 
 #include "ORCs/samples.orc"
 
