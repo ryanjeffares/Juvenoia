@@ -4,7 +4,7 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
--j2 ;-odac
+-j2 -odac
 </CsOptions>
 <CsInstruments>
 
@@ -73,7 +73,7 @@ alwayson "arduino_serial"
 alwayson "mixer"
 ;alwayson "sub"
 alwayson "message"
-alwayson "start_notes"
+;alwayson "start_notes"
 alwayson	"reverb"
 ;alwayson	"delay"
 alwayson "chord_start"
