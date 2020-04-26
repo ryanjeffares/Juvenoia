@@ -4,7 +4,7 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
--j2 -odac
+-odac ;-j2
 </CsOptions>
 <CsInstruments>
 
