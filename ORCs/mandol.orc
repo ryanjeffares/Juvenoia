@@ -46,6 +46,7 @@ instr start_notes
 
 endin
 
+;gitable	ftgen	6, 0, 8192, 1, "Samples/mandpluk.aiff", 0, 0, 0
 
 
 instr mando
@@ -54,12 +55,10 @@ instr mando
 	ifreq	=	p4
 	;ifreq	=	440
 	ipan	=	p5
-;	itable	ftgen	7, 0, 8192, 1, "Samples/mandpluk.aiff", 0, 0, 0
-	
 
 	kenv	madsr	0.01,	1,	0.01,	idur
 
-	asig	mandol	0.9,	k(ifreq),   0.4,	0.9,	1,	1,	2
+	asig	mandol	0.9,	k(ifreq),   0.4,	0.9,	1,	1,	6	
 
 	afilt2	atone	asig,	100
 
@@ -69,7 +68,7 @@ instr mando
 	gafmL *= 0.8
 	gafmR *= 0.8
 */
-			;outs	apanL*0.25,	apanR*0.25
+		;	outs	apanL*0.25,	apanR*0.25
 
 
 	gaverbL	=	gafmL

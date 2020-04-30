@@ -4,7 +4,7 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
--odac ;-j2
+;-odac ;-j2
 </CsOptions>
 <CsInstruments>
 
@@ -14,6 +14,8 @@ nchnls = 2
 0dbfs = 1
 
 seed	0	;ensures random values are different each time by getting a seed from CPU
+
+icnt init 0
 
 instr globals    ;initialising global variables
 
@@ -67,13 +69,13 @@ endin
 #include "ORCs/noise.orc"
 
 alwayson "globals"
-alwayson "arduino_serial"
+alwayson "arduino_serial2"
 ;alwayson "saw1"
 ;alwayson "saw2"
 alwayson "mixer"
 ;alwayson "sub"
 alwayson "message"
-;alwayson "start_notes"
+alwayson "start_notes"
 alwayson	"reverb"
 ;alwayson	"delay"
 alwayson "chord_start"

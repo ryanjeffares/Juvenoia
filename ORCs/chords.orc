@@ -2,6 +2,7 @@
 instr chord_start
 
 	kcnt	init	1
+	icnt	init	0
 	
 	krate	rspline	5,	26,	0.1,	47	;spline for time
 	krate	scale	krate,	10,	0.3	;scaling spline
@@ -11,9 +12,11 @@ instr chord_start
 	kamp	random	0,	1
 	kpres	random	1,	5
 
-	koct1	random	0,	3	;generates random octave - 0 is middle
-	koct1	int	koct1		;makes random number an integer
-	
+	oct:
+		koct1	random	0,	3	;generates random octave - 0 is middle
+		koct1	int	koct1		;makes random number an integer
+	loop_lt	icnt,	1,	3,	oct	
+
 	koct2	random	0,	3
 	koct2	int	koct2
 

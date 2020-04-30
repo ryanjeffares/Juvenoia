@@ -1,6 +1,6 @@
 instr noise_start
 
-	krate	rspline	0,	30,	0.2,	20
+	krate	rspline	0,	0.8,	0.2,	20
 	ktrig	metro	krate
 
 	kfilt	random	500,	4000
