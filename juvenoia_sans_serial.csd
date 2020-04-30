@@ -106,9 +106,12 @@ endin
 
 instr reverb
 
+	gaverboutL	init	0
+	gaverboutR	init	0
+
 	averbL,	averbR	reverbsc	gaverbL,	gaverbR,	0.99,	800
 
-			outs	averbL*2,	averbR*2
+;			outs	averbL*2,	averbR*2
 	gaverbL	=	0
 	gaverbR	=	0
 
@@ -119,7 +122,7 @@ instr mixer
     ksaw1pan chnget "saw1pan"
     ksaw2pan chnget "saw2pan"
 
-    outs ((gasaw1*(1-ksaw1pan)) + (gasaw2*(1-ksaw2pan)) + ((gasub*0.2))*0.3) + gachordsL + gafmL + gasamplesL + ganoiseL, ((gasaw1*ksaw1pan) + (gasaw2*ksaw2pan) + ((gasub*0.2))*0.3) + gachordsR + gafmR + gasamplesR + ganoiseR
+    outs ((gasaw1*(1-ksaw1pan)) + (gasaw2*(1-ksaw2pan)) + ((gasub*0.2))*0.3) + gachordsL + gafmL + gasamplesL + ganoiseL + gaverboutL, ((gasaw1*ksaw1pan) + (gasaw2*ksaw2pan) + ((gasub*0.2))*0.3) + gachordsR + gafmR + gasamplesR + ganoiseR + gaverboutR
 
     amasterl = ((gasaw1*(1-ksaw1pan)) + (gasaw2*(1-ksaw2pan)) + ((gasub*0.2))*0.3) + gachordsL + gafmL + gasamplesL + ganoiseL
     amasterr = ((gasaw1*ksaw1pan) + (gasaw2*ksaw2pan) + ((gasub*0.2))*0.3) + gachordsR + gafmR + gasamplesR + ganoiseR

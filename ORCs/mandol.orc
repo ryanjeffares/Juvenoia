@@ -58,7 +58,9 @@ instr mando
 
 	kenv	madsr	0.01,	1,	0.01,	idur
 
-	asig	mandol	0.9,	k(ifreq),   0.4,	0.9,	1,	1,	6	
+	;asig	mandol	0.9,	k(ifreq),   0.4,	0.9,	1,	1,	6	
+
+	asig	pluck	0.9,	ifreq,	2000,	0,	1
 
 	afilt2	atone	asig,	100
 
