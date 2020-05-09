@@ -46,9 +46,9 @@ instr chord_start
 	kvrate	rspline	0,	0.7,	0.01,	50
 
 	
-	schedkwhennamed	ktrig,	0,	4,	"glass",	0,	10,	kfreq1,	kamp,	kpan,	kc1,	kc2,	kvdepth,	kvrate
-	schedkwhennamed	ktrig,	0,	4,	"glass",	kvdepth,	10,	kfreq2,	kamp,	kpan,	kc1,	kc2,	kvdepth,	kvrate
-	schedkwhennamed	ktrig,	0,	4,	"glass",	kvrate,	10,	kfreq3,	kamp,	kpan,	kc1,	kc2,	kvdepth,	kvrate
+	schedkwhennamed	ktrig,	0,	4,	"glass",	4,	10,	kfreq1,	kamp,	kpan,	kc1,	kc2,	kvdepth,	kvrate
+	schedkwhennamed	ktrig,	0,	4,	"glass",	4+kvdepth,	10,	kfreq2,	kamp,	kpan,	kc1,	kc2,	kvdepth,	kvrate
+	schedkwhennamed	ktrig,	0,	4,	"glass",	4+kvrate,	10,	kfreq3,	kamp,	kpan,	kc1,	kc2,	kvdepth,	kvrate
 
 endin
 

@@ -11,7 +11,7 @@ instr noise_start
 
 	kband	rspline	100,	350,	1,	30
 
-	schedkwhennamed	ktrig,	0,	0,	"noisey",	0,	0.5,	kfilt,	kpan,	kamp,	kband
+	schedkwhennamed	ktrig,	0,	0,	"noisey",	3,	0.5,	kfilt,	kpan,	kamp,	kband
 
 endin
 

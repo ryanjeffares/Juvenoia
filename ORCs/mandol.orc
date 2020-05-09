@@ -12,10 +12,9 @@ instr start_notes
 	krate	scale	krate/4,	10,	0.3	;scaling spline
 	ktrig	metro	(krate*.2)				;metronome modulated by spline
 
-;	koct	random	-2,	2	;generates random octave - 0 is middle
-	;koct	int	koct		;makes random number an integer
-	koct	random	1,	4
-
+	koct	random	2,	3	;generates random octave - 0 is middle
+	koct	int	koct		;makes random number an integer
+	
 	kpan	rspline	0,	1,	0.1,	2
 					;pgs 264, 265
 
@@ -40,7 +39,7 @@ instr start_notes
 
 		;printk2	kmidi,	10
 		kcnt	=	kcnt+1
-		schedkwhennamed	ktrig,	0,	0,	"mando",	0,	4,	kfreq,	kpan
+		schedkwhennamed	ktrig,	0,	0,	"mando",	2,	4,	kfreq,	kpan
 
 	endif
 
