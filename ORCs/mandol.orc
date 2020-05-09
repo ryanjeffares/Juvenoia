@@ -18,7 +18,7 @@ instr start_notes
 	kpan	rspline	0,	1,	0.1,	2
 					;pgs 264, 265
 
-	kfreq	table	kcnt,	5
+	kfreq	table	kcnt,	4
 
 	kfreq	=	cpspch(koct+kfreq)
 
