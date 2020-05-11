@@ -1,6 +1,6 @@
 instr start_notes
 
-    kcnt	init	0
+ 	kcnt	init	0
     
 	if(kcnt>11)	then
 
@@ -8,17 +8,19 @@ instr start_notes
 	
 	endif	
 
-	krate	rspline	0,	5,	2,	100	;spline for time
-	krate	scale	krate/4,	10,	0.3	;scaling spline
+	krate	rspline	0.1,	6,	.5,	12	;spline for time
+	
 	ktrig	metro	(krate*.2)				;metronome modulated by spline
 
-	koct	random	2,	3	;generates random octave - 0 is middle
+	koct	random	-3,	1	;generates random octave - 0 is middle
 	koct	int	koct		;makes random number an integer
 	
 	kpan	rspline	0,	1,	0.1,	2
 					;pgs 264, 265
 
-	kfreq	table	kcnt,	4
+	kfreq	table	kcnt,	5
+
+	kfreq	=	pchmidinn(kfreq)
 
 	kfreq	=	cpspch(koct+kfreq)
 
@@ -39,7 +41,7 @@ instr start_notes
 
 		;printk2	kmidi,	10
 		kcnt	=	kcnt+1
-		schedkwhennamed	ktrig,	0,	0,	"mando",	2,	4,	kfreq,	kpan
+		schedkwhennamed	ktrig,	0,	0,	"mando",	4,	2,	kfreq,	kpan
 
 	endif
 
@@ -54,12 +56,11 @@ instr mando
 	ifreq	=	p4
 	;ifreq	=	440
 	ipan	=	p5
+	iamp	=	0.5
 
-	kenv	madsr	0.01,	1,	0.01,	idur
+	kenv	madsr	0.01,	idur*0.3,	0.1,	2
 
-	;asig	mandol	0.9,	k(ifreq),   0.4,	0.9,	1,	1,	6	
-
-	asig	pluck	0.9,	ifreq,	2000,	0,	1
+	asig	vco2	iamp*kenv,	ifreq,	12
 
 	afilt2	atone	asig,	100
 

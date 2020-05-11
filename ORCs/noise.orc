@@ -1,7 +1,7 @@
 instr noise_start
 
-	krate	rspline	0,	0.8,	0.2,	20
-	ktrig	metro	1 ;krate
+	krate	rspline	0.005,	0.7,	0.2,	20
+	ktrig	metro	krate
 
 	kfilt	random	500,	4000
 
@@ -9,9 +9,9 @@ instr noise_start
 
 	kamp	rspline	0,	1,	1,	30
 
-	kband	rspline	100,	350,	1,	30
+	kband	rspline	300,	700,	1,	30
 
-	schedkwhennamed	ktrig,	0,	0,	"noisey",	3,	0.5,	kfilt,	kpan,	kamp,	kband
+	schedkwhennamed	ktrig,	0,	0,	"noisey",	3,	2,	kfilt,	kpan,	kamp,	kband
 
 endin
 
@@ -27,7 +27,7 @@ instr noisey
 	kenv	madsr	0.01,	idur*0.4,	0.7,	6	
 	asig	noise	0.6*kenv,	ibeta
 
-	asig	butbp	asig,	ifreq,	iband
+	asig	butbp	asig,	ifreq*kenv,	iband
 
 	asig	atone	asig,	200
 

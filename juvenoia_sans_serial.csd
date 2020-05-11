@@ -79,7 +79,7 @@ alwayson "start_notes"
 alwayson	"reverb"
 ;alwayson	"delay"
 ;alwayson "chord_start"
-alwayson "noise_start"
+;alwayson "noise_start"
 
 
 
@@ -109,7 +109,7 @@ instr reverb
 	gaverboutL	init	0
 	gaverboutR	init	0
 
-	averbL,	averbR	reverbsc	gaverbL,	gaverbR,	0.99,	800
+	gaverboutL, gaverboutR	reverbsc	gaverbL,	gaverbR,	0.75,	800
 
 ;			outs	averbL*2,	averbR*2
 	gaverbL	=	0
