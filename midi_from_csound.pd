@@ -1,0 +1,103 @@
+#N canvas 562 150 536 369 12;
+#X declare -lib Gem;
+#X obj 24 31 notein 1;
+#X floatatom 24 55 5 0 0 0 - - -;
+#X obj 116 30 notein 2;
+#X floatatom 116 54 5 0 0 0 - - -;
+#X floatatom 169 54 5 0 0 0 - - -;
+#X obj 116 77 sel 1 2 3 4 5 6;
+#X obj 116 101 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 133 111 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 150 121 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 167 131 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 184 141 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 201 151 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 201 170 s six;
+#X obj 184 230 s five;
+#X obj 167 208 s four;
+#X obj 116 139 s one;
+#X obj 133 161 s two;
+#X obj 150 185 s three;
+#N canvas 275 542 450 300 gem 1;
+#X obj 274 20 declare -lib Gem;
+#X obj 271 127 gemwin;
+#X msg 271 73 create \, 1;
+#X msg 330 101 destroy;
+#X obj 38 27 gemhead;
+#X obj 38 181 text2d;
+#N canvas 650 232 642 424 text 1;
+#X obj 57 35 r one;
+#X obj 99 35 r two;
+#X obj 141 35 r three;
+#X obj 197 35 r four;
+#X obj 246 35 r five;
+#X obj 295 35 r six;
+#X obj 57 59 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 99 59 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 141 59 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 197 59 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 246 59 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 295 59 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X msg 141 161 text i wanna build the wall. we need the wall;
+#X msg 296 267 text facts don't care about your feelings;
+#X obj 61 313 outlet;
+#X msg 57 79 text if you were born in the eighties or nineties you
+may not be prepared for the real world;
+#X msg 99 119 text and they're accused of being entitled narcissistic
+self interested unfocused lazy;
+#X msg 197 190 text and frankly if hillary clinton were a man i don't
+think she'd get 5% of the vote!;
+#X msg 246 230 text and i don't like the way that manning up having
+a stiff upper lip has now become something to be offensive;
+#X connect 0 0 6 0;
+#X connect 1 0 7 0;
+#X connect 2 0 8 0;
+#X connect 3 0 9 0;
+#X connect 4 0 10 0;
+#X connect 5 0 11 0;
+#X connect 6 0 15 0;
+#X connect 7 0 16 0;
+#X connect 8 0 12 0;
+#X connect 9 0 17 0;
+#X connect 10 0 18 0;
+#X connect 11 0 13 0;
+#X connect 12 0 14 0;
+#X connect 13 0 14 0;
+#X connect 15 0 14 0;
+#X connect 16 0 14 0;
+#X connect 17 0 14 0;
+#X connect 18 0 14 0;
+#X restore 86 92 pd text;
+#X connect 2 0 1 0;
+#X connect 3 0 1 0;
+#X connect 4 0 5 0;
+#X connect 6 0 5 0;
+#X restore 331 32 pd gem;
+#X connect 0 0 1 0;
+#X connect 2 0 3 0;
+#X connect 2 1 4 0;
+#X connect 3 0 5 0;
+#X connect 5 0 6 0;
+#X connect 5 1 7 0;
+#X connect 5 2 8 0;
+#X connect 5 3 9 0;
+#X connect 5 4 10 0;
+#X connect 5 5 11 0;
+#X connect 6 0 15 0;
+#X connect 7 0 16 0;
+#X connect 8 0 17 0;
+#X connect 9 0 14 0;
+#X connect 10 0 13 0;
+#X connect 11 0 12 0;
