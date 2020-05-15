@@ -4,7 +4,7 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
--odac ;-j2
+;-odac ;-j2
 </CsOptions>
 <CsInstruments>
 
@@ -14,6 +14,8 @@ nchnls = 2
 0dbfs = 1
 
 seed	0	;ensures random values are different each time by getting a seed from CPU
+
+insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14
 
 icnt init 0
 
@@ -78,7 +80,7 @@ alwayson "mixer"
 alwayson "start_notes"
 alwayson	"reverb"
 ;alwayson	"delay"
-;alwayson "chord_start"
+alwayson "chord_start"
 ;alwayson "noise_start"
 
 
