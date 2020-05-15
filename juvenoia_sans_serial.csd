@@ -4,12 +4,12 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
-;-odac ;-j2
+-odac:sysdefault ;-j2
 </CsOptions>
 <CsInstruments>
 
-sr	=	44100
-ksmps =  1024   ;arduino needs a high k rate to send over all sensor values
+sr	=	48000
+ksmps =  2048   ;arduino needs a high k rate to send over all sensor values
 nchnls = 2
 0dbfs = 1
 
@@ -81,7 +81,7 @@ alwayson "start_notes"
 alwayson	"reverb"
 ;alwayson	"delay"
 alwayson "chord_start"
-;alwayson "noise_start"
+alwayson "noise_start"
 
 
 
