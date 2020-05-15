@@ -12,16 +12,8 @@ instr chord_start
 	kamp	random	0,	1
 	kpres	random	1,	5
 
-	oct:
-		koct1	random	0,	3	;generates random octave - 0 is middle
-		koct1	int	koct1		;makes random number an integer
-	loop_lt	icnt,	1,	3,	oct	
-
-	koct2	random	0,	3
-	koct2	int	koct2
-
-	koct3	random	0,	3
-	koct3	int	koct3
+	koct	random	0,	3	;generates random octave - 0 is middle
+	koct	int	koct		;makes random number an integer
 
 	kmidi1	random	0,	11
 	kmidi1	table	kmidi1,	1
@@ -36,9 +28,9 @@ instr chord_start
 	kpch2	=	pchmidinn(kmidi2)
 	kpch3	=	pchmidinn(kmidi3)
 
-	kfreq1	=	cpspch(koct1+kpch1)
-	kfreq2	=	cpspch(koct2+kpch2)
-	kfreq3	=	cpspch(koct3+kpch3)
+	kfreq1	=	cpspch(koct+kpch1)
+	kfreq2	=	cpspch(koct+kpch2)
+	kfreq3	=	cpspch(koct+kpch3)
 
 	kc1	rspline	0,	10,	1,	20
 	kc2	rspline	0,	10,	10,	30
@@ -62,9 +54,11 @@ instr glass
 	kvdepth	=	p9
 	kvrate	=	p10
 
-    	asig fmbell iamp, ifreq*6, kc1, kc2, kvdepth, kvrate
+;    	asig fmbell iamp, ifreq*6, kc1, kc2, kvdepth, kvrate
 ;asig fmbell iamp, ifreq, 3, 6, 0.2, 10
 
+
+	asig oscil 0.3,	ifreq
 
 	asig	atone	asig,	200
 

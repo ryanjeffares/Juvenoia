@@ -29,7 +29,9 @@ instr noisey
 
 	asig	butbp	asig,	ifreq*kenv,	iband
 
-	asig	atone	asig,	200
+	asig	atone	asig,	500
+
+	asig	=	asig*0.5
 
 	ganoiseL,	ganoiseR    pan2	asig,	ipan
 

@@ -4,7 +4,7 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
--odac ;-j2
+;-odac ;-j2
 </CsOptions>
 <CsInstruments>
 
@@ -78,7 +78,7 @@ alwayson "mixer"
 alwayson "start_notes"
 alwayson	"reverb"
 ;alwayson	"delay"
-;alwayson "chord_start"
+alwayson "chord_start"
 ;alwayson "noise_start"
 
 

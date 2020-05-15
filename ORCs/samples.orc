@@ -2,7 +2,7 @@
 instr samples
 
     ksample = p4
-    
+/*    
     if(ksample = 1) then
         asigl, asigr diskin "Samples/Sample1.wav"
     elseif(ksample = 2) then
@@ -18,6 +18,6 @@ instr samples
     endif
     
     gasamplesL, gasamplesR reverbsc asigl, asigr, 0.5, 10000    
-    
+  */  
 endin
 
