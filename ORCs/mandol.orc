@@ -8,9 +8,9 @@ instr start_notes
 	
 	endif	
 
-	krate	rspline	0.1,	6,	.5,	12	;spline for time
+	krate	rspline	0.1,	9,	.5,	12	;spline for time
 	
-	ktrig	metro	(krate*.2)				;metronome modulated by spline
+	ktrig	metro	(krate*.3)				;metronome modulated by spline
 
 	koct	random	-3,	1	;generates random octave - 0 is middle
 	koct	int	koct		;makes random number an integer

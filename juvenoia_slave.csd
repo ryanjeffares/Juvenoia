@@ -9,7 +9,7 @@ will become redundant eventually*/
 <CsInstruments>
 
 sr	=	48000
-ksmps =  2048   ;arduino needs a high k rate to send over all sensor values
+ksmps =  1024   ;arduino needs a high k rate to send over all sensor values
 nchnls = 2
 0dbfs = 1
 
@@ -41,7 +41,7 @@ instr globals    ;initialising global variables
 
     gaverbL	init	0
     gaverbR	init	0    
-    
+ /*   
     gachordsL init 0
     gachordsR init 0
     gafmL init 0
@@ -51,7 +51,7 @@ instr globals    ;initialising global variables
     
     gasamplesL init 0
     gasamplesR init 0
-    
+ */   
 endin 
 
 #include "ORCs/ardnocabbage.orc"
@@ -118,7 +118,7 @@ instr reverb
 	gaverbR	=	0
 
 endin
-
+/*
 instr mixer
 
     ksaw1pan chnget "saw1pan"
@@ -134,7 +134,7 @@ instr mixer
     chnset kmasterrrms, "masterr"
 
 endin
-
+*/
 </CsInstruments>
 <CsScore>
 ;causes Csound to run for about 7000 years...
