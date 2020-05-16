@@ -15,7 +15,7 @@ nchnls = 2
 
 seed	0	;ensures random values are different each time by getting a seed from CPU
 
-insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14
+insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14, 13
 
 icnt init 0
 
@@ -41,7 +41,7 @@ instr globals    ;initialising global variables
 
     gaverbL	init	0
     gaverbR	init	0    
-    
+/*    
     gachordsL init 0
     gachordsR init 0
     gafmL init 0
@@ -51,7 +51,7 @@ instr globals    ;initialising global variables
     
     gasamplesL init 0
     gasamplesR init 0
-    
+*/    
 endin 
 
 #include "ORCs/ardnocabbage.orc"
@@ -70,17 +70,19 @@ endin
 
 #include "ORCs/noise.orc"
 
-alwayson "globals"
+schedule("globals",0,2)
+
+;alwayson "globals"
 alwayson "arduino_serial2"
 ;alwayson "saw1"
 ;alwayson "saw2"
-alwayson "mixer"
+;alwayson "mixer"
 ;alwayson "sub"
 ;alwayson "message"
 alwayson "start_notes"
 alwayson	"reverb"
 ;alwayson	"delay"
-alwayson "chord_start"
+;alwayson "chord_start"
 alwayson "noise_start"
 
 
@@ -118,7 +120,7 @@ instr reverb
 	gaverbR	=	0
 
 endin
-
+/*
 instr mixer
 
     ksaw1pan chnget "saw1pan"
@@ -134,7 +136,7 @@ instr mixer
     chnset kmasterrrms, "masterr"
 
 endin
-
+*/
 </CsInstruments>
 <CsScore>
 ;causes Csound to run for about 7000 years...

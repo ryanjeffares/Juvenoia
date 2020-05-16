@@ -33,10 +33,10 @@ instr noisey
 
 	asig	=	asig*0.5
 
-	ganoiseL,	ganoiseR    pan2	asig,	ipan
+	apanL,	apanR    pan2	asig,	ipan
 
-	gaverbL	=	ganoiseL*2
-	gaverbR	=	ganoiseR*2
+	gaverbL	=	apanL*2
+	gaverbR	=	apanR*2
 	
 endin
 

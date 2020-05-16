@@ -64,17 +64,12 @@ instr mando
 
 	afilt2	atone	asig,	100
 
-	gafmL,	gafmR   pan2	afilt2,	ipan
+	apanL,	apanR   pan2	afilt2,	ipan
 	
-/*
-	gafmL *= 0.8
-	gafmR *= 0.8
-*/
-		;	outs	apanL*0.25,	apanR*0.25
+			outs	apanL*0.25,	apanR*0.25
 
-
-	gaverbL	=	gafmL
-	gaverbR	=	gafmR
+	gaverbL	=	apanL
+	gaverbR	=	apanR
 
 endin
 
