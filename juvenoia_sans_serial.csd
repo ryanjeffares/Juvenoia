@@ -4,24 +4,24 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
--odac:sysdefault ;-j2
+-odac:sysdefault:CARD=USB ;-j2
 </CsOptions>
 <CsInstruments>
 
 sr	=	48000
-ksmps =  2048   ;arduino needs a high k rate to send over all sensor values
+ksmps =  1024   ;arduino needs a high k rate to send over all sensor values
 nchnls = 2
 0dbfs = 1
 
 seed	0	;ensures random values are different each time by getting a seed from CPU
 
-insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14, 13
+insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14
 
 icnt init 0
 
 instr globals    ;initialising global variables
 
-    gkpot1 init 0
+    gkpot1 init 40
     gkpot2 init 0
     gkbutton1 init 0
     gkbutton2 init 0
@@ -74,7 +74,7 @@ schedule("globals",0,2)
 
 ;alwayson "globals"
 alwayson "arduino_serial2"
-;alwayson "saw1"
+alwayson "saw1"
 ;alwayson "saw2"
 ;alwayson "mixer"
 ;alwayson "sub"
@@ -83,7 +83,7 @@ alwayson "start_notes"
 alwayson	"reverb"
 ;alwayson	"delay"
 ;alwayson "chord_start"
-alwayson "noise_start"
+;alwayson "noise_start"
 
 
 

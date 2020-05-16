@@ -8,9 +8,9 @@ instr start_notes
 	
 	endif	
 
-	krate	rspline	0.1,	6,	.5,	12	;spline for time
+	krate	rspline	0.1,	9,	.5,	12	;spline for time
 	
-	ktrig	metro	(krate*.2)				;metronome modulated by spline
+	ktrig	metro	(krate*.3)				;metronome modulated by spline
 
 	koct	random	-3,	1	;generates random octave - 0 is middle
 	koct	int	koct		;makes random number an integer
@@ -56,15 +56,15 @@ instr mando
 	ifreq	=	p4
 	;ifreq	=	440
 	ipan	=	p5
-	iamp	=	0.5
+	iamp	random	0.1,	0.6
 
-	kenv	madsr	0.01,	idur*0.3,	0.1,	2
+	kenv	madsr	0.05,	idur*0.6,	0.4,	2
 
 	asig	vco2	iamp*kenv,	ifreq,	12
 
-	afilt2	atone	asig,	100
+;	asig	atone	asig,	100
 
-	apanL,	apanR   pan2	afilt2,	ipan
+	apanL,	apanR   pan2	asig,	ipan
 	
 			outs	apanL*0.25,	apanR*0.25
 
