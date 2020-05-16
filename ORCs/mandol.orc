@@ -56,15 +56,15 @@ instr mando
 	ifreq	=	p4
 	;ifreq	=	440
 	ipan	=	p5
-	iamp	=	0.5
+	iamp	random	0.1,	0.6
 
-	kenv	madsr	0.01,	idur*0.3,	0.1,	2
+	kenv	madsr	0.05,	idur*0.6,	0.4,	2
 
 	asig	vco2	iamp*kenv,	ifreq,	12
 
-	afilt2	atone	asig,	100
+;	asig	atone	asig,	100
 
-	apanL,	apanR   pan2	afilt2,	ipan
+	apanL,	apanR   pan2	asig,	ipan
 	
 			outs	apanL*0.25,	apanR*0.25
 
