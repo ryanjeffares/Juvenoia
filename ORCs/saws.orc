@@ -1,9 +1,16 @@
 instr saw1
 
-    kfreq = gkpot1;/4
-    kcutoff = gkcutoff
+kfreq init 45
+ ;   kfreq = gkpot1;/4
+ktrig metro 0.1
 
-    kcents lfo 10, 0.5
+if (ktrig == 1) then
+kfreq	random	20, 100
+endif
+   ; kcutoff = gkcutoff
+	kcutoff	= 300
+	
+    kcents lfo 0.8, 0.5
     kcents = cent(kcents)
     kfreq *= kcents
 
@@ -13,7 +20,7 @@ instr saw1
         
     asig vco2 0.1, kfreq
     asig lpf18 asig, kcutoff, 0.5, 0.9
-	asig	=	asig*0.3
+	asig	=	asig*0.1
 	outs	asig,	asig
 
 endin
