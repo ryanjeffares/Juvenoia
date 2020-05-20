@@ -4,19 +4,19 @@
 </CsOptions>
 <CsInstruments>
 
-ksmps = 512     ;arduino needs a high k rate to send over all sensor values
+ksmps = 256     ;arduino needs a high k rate to send over all sensor values
 nchnls = 2
 0dbfs = 1
 
-zakinit 15, 6    ; Using Zak space for sensor variables and as much audio as possible.
+zakinit 15, 8    ; Using Zak space for sensor variables and as much audio as possible.
 ; Zak opcodes are fast and do not write the variable if an error is detected
-gaverbL	init	0
-gaverbR	init	0   
+gaverbL	init 0
+gaverbR	init 0   
 gaDelL init 0
-gaDelR init 0 
+gaDelR init 0
+gkSample init 0 
 
 ; Gen table for Saw wave ref: http://iainmccurdy.org/CsoundRealtimeExamples/Cabbage/Instruments/Synths/HardSyncSynth.csd
-; btw big respect to Ian McCurdy but he formatted this like a psychopath originally 
 ; Faster than using saw wave mode in vco2
 giSaw ftgen 0, 0, 4097, 7, 1, 4096, -1   							
 icount = 0
@@ -30,10 +30,10 @@ loop_le	icount, 1, 127, loopSaw
 #include "listeners.orc"
 #include "instruments.orc"
 
-; This instrument is ran as the score begins. Turns other instruments on, then turns itself of...
+; This instrument is ran as the score begins. Turns other instruments on, then turns itself off...
 instr Initialise
     turnon "arduino_serial"
-    turnon "saws"
+    turnon "drones"
     turnon "mixer"
     turnon "sub"
     turnon "pluck_listener"
@@ -50,12 +50,15 @@ endin
 instr arduino_serial
     ; Ref: http://floss.booktype.pro/csound/b-csound-and-arduino/
     ; Initialize the variables read
-    kPot1       init 0
-    kPot2       init 0
-    kPot3       init 0
-    kButton1    init 0
-    kButton2    init 0
-    kToggle     init 0
+    kPot1 init 0
+    kPot2 init 0
+    kPot3 init 0
+    kButton1 init 0
+    kButton2 init 0
+    kToggle init 0
+    kProx init 0
+    kLDR init 0
+    kOn init 0
 
     iPort serialBegin "/dev/cu.usbmodem142301", 9600	;connect to the arduino with baudrate = 9600
     serialWrite iPort, 1		;Triggering the Arduino (k-rate)
@@ -84,11 +87,27 @@ instr arduino_serial
                 kPot3 = kValue
             elseif (kType == 133) then
                 kToggle = kValue
+            elseif (kType == 134) then
+                kProx = kValue
+            elseif (kType == 135) then
+                kLDR = kValue
         endif
 
     kPot1 port kPot1, 0.01 ; Smooth out the analog sensors
     kPot2 port kPot2, 0.01 
     kPot3 port kPot3, 0.01   
+    kProx port kProx, 0.01
+    if (kLDR < 600) then
+        kOn = 1
+    else
+        kOn = 0
+    endif
+    
+    outkc 3, 0, kPot1, 0, 1023
+    outkc 4, 0, kPot2, 0, 1023
+    outkc 5, 0, kPot3, 0, 1023
+    outkc 6, 0, kProx, 0, 1023
+    outkc 7, 0, kOn, 0, 1
 
     zkw kPot1, 0    ; Put these variables in to Zak space for use in other instruments
     zkw kPot2, 1
@@ -96,10 +115,13 @@ instr arduino_serial
     zkw kButton1, 3
     zkw kButton2, 4
     zkw kToggle, 5
+    zkw kProx, 6
+    zkw kOn, 7
     continue:
 endin
 
 instr delay
+; REF: http://www.csounds.com/manual/html/delayw.html
 abuf2	delayr	1
 adelL 	deltap	.4		;first tap (on left channel)
 adelM 	deltap	1		;second tap (on middle channel)
@@ -111,7 +133,7 @@ adelR 	deltap  .15	;one pitch changing tap (on the right chn.)
 ;make a mix of all deayed signals	
 	outs	adelL + adelM, adelR + adelM
 
-clear	gaDelL
+clear gaDelL
 clear gaDelR
 endin
 

@@ -1,35 +1,42 @@
 
 ;---------------------SAWS---------------------
-instr saws
+instr drones
+    kOn zkr 7
+    kOn port kOn, 1
     kCents1 lfo 30, 0.1     ; Detune the saw waves against eachother slowly
     kCents2 lfo 30, 0.05
     kCents1 = cent(kCents1)
     kCents2 = cent(kCents2)
     kPot1 zkr 0             ; Get the pitch and filter freq from sensor values in Zak space
     kPot2 zkr 1
+    kProx zkr 6
     kCutoff abletonLimiter kPot2, 20, 0      ; Bad things happen when frequencies go below 20s
-    kFreq1 abletonLimiter (kPot1 * kCents1) / 6, 20, 0 
-    kFreq2 abletonLimiter ((kPot1 * kCents2)) / 4, 20, 0
+    kFreq1 abletonLimiter (kPot1 * kCents1) / 6, 50, 0 
+    kFreq2 abletonLimiter ((kPot1 * kCents2)) / 4, 50, 0
+    kFreq1 += (kProx / 4)
+    kFreq2 += (kProx / 4)
     kPres lfo 1, 0.02
     kPres += 3
     kRat lfo 0.18, 0.01
     kRat += 0.205
 
     aSaw oscili 0.05, kFreq1, giSaw     ; Saw waves made from table, faster than vco2
-    aSaw lpf18 aSaw, kCutoff*4, 0.5, 0.9
-    aSaw reverb aSaw, 1
+    aSaw lpf18 aSaw, (kCutoff*4) + (kProx * 2), 0.5, 0.9
+    aSaw reverb aSaw, 1 + (kProx / 500)
     aSaw distort aSaw, 0.5 * (kPot1 * 0.000977), 1
     aSawDel delay aSaw, 0.02
     aBow wgbow 0.1, kFreq2, kPres, 0.127236, 3 * (kPot1 * 0.000977), 0.01
-    aBow reverb aBow, 1
+    aBow reverb aBow, 1 + (kProx / 500)
     aBow distort aBow, 0.5 * (kPot1 * 0.000977), 1
     aBowDel delay aBow, 0.02
-    zaw aSaw + (aBowDel * 0.3), 0    ; Write the audio to Zak space
-    zaw aSawDel + (aBow * 0.3), 1
+    zaw (aSaw + (aBowDel * 0.3)) * kOn, 0    ; Write the audio to Zak space
+    zaw (aSawDel + (aBow * 0.3)) * kOn, 1
 endin
 
 ;---------------------SUB---------------------
 instr sub
+    kOn zkr 7
+    kOn port kOn, 1
     ; LFO to modulate the sub's pitch, get the pitch from sensor value in Zak space and limit it
     kLfo lfo 5, 0.02    
     kFreq zkr 0
@@ -41,7 +48,7 @@ instr sub
     aDel oscil 0.1, 0.1
     aSig flanger aSig, aDel, 0.4
     aSig lpf18 aSig, 200, 0.5, 0.5
-    zaw aSig*0.5, 2
+    zaw aSig*0.5*kOn, 2
 endin
 
 ;---------------------PLUCKS---------------------
@@ -57,7 +64,7 @@ instr plucky
     ;outs (aRevL *p6) * 0.8, (aRevR * (1 - p6)) * 0.8
     zawm (aRevL *p6) * 0.8, 3
     zawm (aRevR * (1 - p6)) * 0.8, 4
-    midion 1, p4, 100
+    midion 1, p4, 100 ; Send the note to Pd to control visuals
 endin
 
 ;---------------------SAMPLES---------------------
@@ -76,7 +83,6 @@ instr samples
     zaw aSigr, 6
     vincr gaDelL, aSigl * 0.3
     vincr gaDelR, aSigr * 0.3
-    midion 2, p4, kPot3 * 127
 endin
 
 ;---------------------ARP---------------------
@@ -90,7 +96,8 @@ instr 123
     kFreq = cpsmidinn(iNote)
     
     kCutoff zkr 0
-    kCutoff *=  10
+    kCutoff = kCutoff / 1023
+    kCutoff scale kCutoff, 10000, 600
     kCents = 10
     kCents = cent(kCents)
 
@@ -102,6 +109,8 @@ instr 123
     ;outs aRevL * 0.5 * p5, aRevR * 0.5 * (1 - p5)
     zawm aRevL * 0.5 * p5, 7
     zawm aRevR * 0.5 * (1 - p5), 8
+    vincr gaDelL, aRevL * 0.1
+    vincr gaDelR, aRevR * 0.1
 endin
 
 ;---------------------FM---------------------

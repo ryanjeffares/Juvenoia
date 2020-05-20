@@ -22,24 +22,17 @@ opcode abletonLimiter, k, kkk
     xout kVal
 endop
 
-opcode randomOther, k, kkk
-    ; kres randomOther kmin, kmax, kint
-    ; Outputs a different random number on every successive use
-    ; kInt accepts a 0 or a 1, 0 will result in float values, 1 will result in integer values
+opcode randomOther, k, kk
+    ; "God does not play dice with the universe" - Albert Einstein
+    ; kres randomOther kmin, kmax
+    ; Outputs a different random integer on every successive use
     ; Thanks to Joachim Heintz on the Csound mailing list for the kgoto method
     seed 0 ; Seeds from system clock for a different random sequence every time we use this score
-    kMin, kMax, kInt xin
+    kMin, kMax xin
     kOldValue init 0    ; Create a variable to store the previous random numnber
     randomise:
     kValue random kMin, kMax    ; Generate a random number
-        if (kInt == 1) then     ; Convert to int if int mode is on
-            kValue = int(kValue)  
-            if (kValue == -0) then  ; I hate this but I'm afraid -0 could screw stuff up
-                kValue = 0
-            endif          
-        elseif (kInt == 0) then
-            kValue = kValue
-        endif
+    kValue = int(kValue)
     if(kValue == kOldValue) kgoto randomise  ; If we generate the same random number twice in a row, try again
     kOldValue = kValue  ; Store the value to check in the next pass
     xout kValue
