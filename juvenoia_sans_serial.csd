@@ -5,6 +5,7 @@ will become redundant eventually*/
 <CsoundSynthesizer>
 <CsOptions>
 -odac:sysdefault:CARD=USB ;-j2
+;-M hw:1,1
 </CsOptions>
 <CsInstruments>
 
@@ -15,16 +16,17 @@ nchnls = 2
 
 seed	0	;ensures random values are different each time by getting a seed from CPU
 
-insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14
+insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14,	4,	2
 
 icnt init 0
 
 instr globals    ;initialising global variables
 
-    gkpot1 init 40
-    gkpot2 init 0
-    gkbutton1 init 0
-    gkbutton2 init 0
+	gkpot2 init 0
+    gkpot init 60
+    gkpres init 0
+    gkbut1 init 0
+    gkbut2 init 0
     gksoftpot init 0
 
     gasaw1 init 0
@@ -53,6 +55,7 @@ instr globals    ;initialising global variables
     gasamplesR init 0
 */    
 endin 
+
 
 #include "ORCs/ardnocabbage.orc"
 
@@ -84,7 +87,17 @@ alwayson	"reverb"
 ;alwayson	"delay"
 ;alwayson "chord_start"
 ;alwayson "noise_start"
+;alwayson "midi"
 
+
+instr	midi
+
+	gkbut1	midictrl	1,	0,	1
+	gkbut2	midictrl	2,	0,	1
+	gkpot	midictrl	3,	0,	127
+	gkpres	midictrl	4,	0,	127
+
+endin
 
 
 /*
