@@ -1,0 +1,41 @@
+<CsoundSynthesizer>
+<CsOptions>
+-+rtmidi=alsa 
+-Ma ;hw:1,1
+</CsOptions>
+; ==============================================
+<CsInstruments>
+
+sr	=	48000
+ksmps	=	1024
+;nchnls	=	2
+0dbfs	=	1
+
+instr 1	
+	
+	kbut1	midictrl	1,	0,	1
+		printk2	kbut1
+	kbut2	midictrl	2,	0,	1
+		printk2	kbut2
+	kpot	midictrl	3,	0,	127
+		printk2	kpot
+	kpres	midictrl	4,	0,	127
+		printk2 kpres
+
+/*	
+		initc7	1,	1,	0
+	kpres	midic7	1,	0,	1	
+		printk2	kpres
+*/
+endin
+
+</CsInstruments>
+; ==============================================
+<CsScore>
+
+i1 0 120
+
+
+</CsScore>
+</CsoundSynthesizer>
+

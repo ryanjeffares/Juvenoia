@@ -1,6 +1,6 @@
 instr saw1
 
-    kfreq = gkpot1;/4
+    kfreq = gkpot*4 ;/4
     kcutoff = gkcutoff
 
     kcents lfo 10, 0.5
