@@ -61,7 +61,6 @@ instr plucky
     aHipass atone (aSig1 + aSig2), 250 
     aRevL, aRevR reverbsc aHipass, aHipass, 0.8, 2000
     aRevL, aRevR stereoFilter aRevL, aRevR, 20000, 250
-    ;outs (aRevL *p6) * 0.8, (aRevR * (1 - p6)) * 0.8
     zawm (aRevL *p6) * 0.8, 3
     zawm (aRevR * (1 - p6)) * 0.8, 4
     midion 1, p4, 100 ; Send the note to Pd to control visuals
@@ -116,32 +115,26 @@ endin
 ;---------------------FM---------------------
 instr fm
 
-	idur	=	p3
-	ifreq	=	p4
+	;idur	=	p3
+	;ifreq	=	p4
 	;ifreq	=	440
-	ipan	=	p5
+	;ipan	=	p5
     kFmFreq zkr 2
-	kenv	madsr	0.01,	0.01,	1,	idur/2
-	asig1	vco2	kenv,	ifreq/2,	12
-	asig2	vco2	kenv,	(kFmFreq + 20) / 2,	12
-
-	asig	=	asig1	*	asig2
-
-
-	afilt	lpf18	asig,	4000*kenv,	.2,	.8
-
-	afilt2	atone	afilt,	100
-
-	afmL,	afmR   pan2	afilt2,	ipan
-	
-	afmL *= 0.25
-	afmR *= 0.25
-    zawm afmL, 9
-    zawm afmR, 10
-	gaverbL	=	afmL
-	gaverbR	=	afmR
-    vincr gaDelL, afmL * 0.02
-    vincr gaDelR, afmR * 0.02
+	kEnv madsr 0.01, 0.01, 1, p3/2 ; An envelope for filter and amp
+	aSig1 vco2 kEnv, p4/2, 12   ; Two triangle waves
+	aSig2 vco2 kEnv, (kFmFreq + 20) / 2, 12
+	aSig = aSig1 * aSig2        ; Multiple the two audio signals for FM synthesis
+	aSig lpf18 aSig, 4000*kEnv, .2, .8  ; Filtering
+	aSig atone aSig, 100
+	aFmL, aFmR pan2 aSig, p5    ; Panning
+	aFmL *= 0.25    ; Attenuation
+	aFmR *= 0.25
+    zawm aFmL, 9    ; Write audio to Zak space
+    zawm aFmR, 10
+	gaverbL	= aFmL  ; Reverb and delay sends
+	gaverbR	= aFmR
+    vincr gaDelL, aFmL * 0.02
+    vincr gaDelR, aFmR * 0.02
 
 endin
 
