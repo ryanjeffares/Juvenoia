@@ -5,7 +5,7 @@ will become redundant eventually*/
 <CsoundSynthesizer>
 <CsOptions>
 -odac:sysdefault:CARD=USB ;-j2
-;-M hw:1,1
+-M hw:1,1
 </CsOptions>
 <CsInstruments>
 
@@ -56,6 +56,7 @@ instr globals    ;initialising global variables
 */    
 endin 
 
+#include "ORCs/midiin.orc"
 
 #include "ORCs/ardnocabbage.orc"
 
