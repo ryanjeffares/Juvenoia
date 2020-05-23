@@ -1,41 +1,90 @@
-<CsoundSynthesizer>
-<CsOptions>
--+rtmidi=alsa 
--Ma ;hw:1,1
-</CsOptions>
-; ==============================================
-<CsInstruments>
-
-sr	=	48000
-ksmps	=	1024
-;nchnls	=	2
-0dbfs	=	1
-
-instr 1	
-	
-	kbut1	midictrl	1,	0,	1
-		printk2	kbut1
-	kbut2	midictrl	2,	0,	1
-		printk2	kbut2
-	kpot	midictrl	3,	0,	127
-		printk2	kpot
-	kpres	midictrl	4,	0,	127
-		printk2 kpres
-
-/*	
-		initc7	1,	1,	0
-	kpres	midic7	1,	0,	1	
-		printk2	kpres
-*/
-endin
-
-</CsInstruments>
-; ==============================================
-<CsScore>
-
-i1 0 120
-
-
-</CsScore>
-</CsoundSynthesizer>
-
+#N canvas 517 129 152 157 12;
+#N canvas 1 124 353 498 duino 1;
+#X obj 82 274 route digital analog;
+#X obj 82 375 route 2;
+#X obj 203 318 route 0 1;
+#X msg 13 187 devices;
+#X msg 13 70 close;
+#X msg 122 178 pinMode 14 2;
+#X msg 102 157 pinMode 15 2;
+#X msg 90 128 pinMode 2 0;
+#X msg 207 149 pinMode 3 0;
+#X obj 18 356 route 3;
+#X obj 205 97 delay 2000;
+#X msg 59 72 open 0;
+#X obj 148 16 loadbang;
+#X obj 18 429 s but2;
+#X obj 82 465 s but1;
+#X obj 81 204 pduino/arduino;
+#X obj 18 402 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 203 422 s pressure;
+#X obj 237 375 s pot;
+#X floatatom 82 400 5 0 0 0 - - -, f 5;
+#X connect 0 0 1 0;
+#X connect 0 0 9 0;
+#X connect 0 1 2 0;
+#X connect 1 0 19 0;
+#X connect 2 0 17 0;
+#X connect 2 1 18 0;
+#X connect 3 0 15 0;
+#X connect 4 0 15 0;
+#X connect 5 0 15 0;
+#X connect 6 0 5 0;
+#X connect 6 0 15 0;
+#X connect 7 0 6 0;
+#X connect 7 0 8 0;
+#X connect 7 0 15 0;
+#X connect 8 0 15 0;
+#X connect 9 0 16 0;
+#X connect 10 0 7 0;
+#X connect 11 0 15 0;
+#X connect 12 0 11 0;
+#X connect 12 0 10 0;
+#X connect 15 0 0 0;
+#X connect 16 0 13 0;
+#X connect 19 0 14 0;
+#X restore 37 32 pd duino;
+#N canvas 70 206 411 348 midi 0;
+#X obj 181 104 r pot;
+#X obj 10 106 r pressure;
+#X obj 9 9 r but1;
+#X obj 142 8 r but2;
+#X obj 181 132 * 127;
+#X floatatom 181 181 5 0 0 0 - - -, f 5;
+#X obj 181 157 int;
+#X obj 10 156 int;
+#X obj 10 131 * 508;
+#X text 26 273 pot & pressure scaled between 0 & 127;
+#X obj 9 37 makenote 64 250;
+#X obj 46 70 noteout 1;
+#X obj 9 37 makenote 64 250;
+#X obj 46 70 noteout 1;
+#X obj 141 38 makenote 64 250;
+#X obj 10 206 makenote 64 250;
+#X obj 179 70 noteout 2;
+#X obj 47 239 noteout 3;
+#X floatatom 10 181 5 0 0 0 - - -, f 5;
+#X obj 181 205 makenote 64 250;
+#X obj 218 238 noteout 4;
+#X connect 0 0 4 0;
+#X connect 0 0 4 0;
+#X connect 1 0 8 0;
+#X connect 2 0 10 0;
+#X connect 4 0 6 0;
+#X connect 5 0 19 0;
+#X connect 6 0 5 0;
+#X connect 7 0 18 0;
+#X connect 8 0 7 0;
+#X connect 10 0 11 0;
+#X connect 10 1 11 1;
+#X connect 12 0 13 0;
+#X connect 12 1 13 1;
+#X connect 14 0 16 0;
+#X connect 14 1 16 1;
+#X connect 15 0 17 0;
+#X connect 15 1 17 1;
+#X connect 18 0 15 0;
+#X connect 19 0 20 0;
+#X connect 19 1 20 1;
+#X restore 43 80 pd midi;
