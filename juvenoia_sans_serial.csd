@@ -16,7 +16,7 @@ nchnls = 2
 
 seed	0	;ensures random values are different each time by getting a seed from CPU
 
-insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14,	4,	2
+insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14,	4;,	2
 
 icnt init 0
 
@@ -82,12 +82,12 @@ alwayson "saw1"
 ;alwayson "mixer"
 ;alwayson "sub"
 ;alwayson "message"
-alwayson "start_notes"
+;alwayson "start_notes"
 alwayson	"reverb"
 ;alwayson	"delay"
 ;alwayson "chord_start"
 ;alwayson "noise_start"
-;alwayson "midi"
+alwayson "midi"
 
 
 instr	midi
