@@ -88,17 +88,7 @@ alwayson	"reverb"
 ;alwayson	"delay"
 ;alwayson "chord_start"
 ;alwayson "noise_start"
-alwayson "midi"
-
-
-instr	midi
-
-	gkbut1	midictrl	1,	0,	1
-	gkbut2	midictrl	2,	0,	1
-	gkpot	midictrl	3,	0,	127
-	gkpres	midictrl	4,	0,	127
-
-endin
+;alwayson "midi"
 
 
 /*

@@ -56,14 +56,6 @@ instr globals    ;initialising global variables
  */   
 endin 
 
-instr midi
-
-	gkbut1	midictrl	1,	0,	1
-	gkbut2	midictrl	2,	0,	1
-	gkpot	midictrl	3,	0,	127
-	gkpres	midictrl	4,	0,	127
-
-endin
 
 #include "ORCs/midiin.orc"
 
