@@ -1,7 +1,7 @@
-massign	66,	1
-massign	67,	2
-massign	68,	3
-massign	69,	4
+massign	1,	66
+massign	2,	67
+massign	3,	68
+massign	4,	69
 
 instr 66
 

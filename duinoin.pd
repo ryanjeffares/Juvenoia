@@ -1,5 +1,5 @@
-#N canvas 517 129 152 157 12;
-#N canvas 1 124 353 498 duino 1;
+#N canvas 96 233 152 157 12;
+#N canvas 1 120 353 498 duino 0;
 #X obj 82 274 route digital analog;
 #X obj 82 375 route 2;
 #X obj 203 318 route 0 1;
@@ -45,7 +45,7 @@
 #X connect 16 0 13 0;
 #X connect 19 0 14 0;
 #X restore 37 32 pd duino;
-#N canvas 70 206 411 348 midi 0;
+#N canvas 68 202 411 348 midi 0;
 #X obj 181 104 r pot;
 #X obj 10 106 r pressure;
 #X obj 9 9 r but1;

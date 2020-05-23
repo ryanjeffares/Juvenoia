@@ -65,6 +65,7 @@ instr midi
 
 endin
 
+#include "ORCs/midiin.orc"
 
 #include "ORCs/ardnocabbage.orc"
 
