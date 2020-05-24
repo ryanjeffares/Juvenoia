@@ -97,13 +97,13 @@ instr arduino_serial
     kPot2 port kPot2, 0.01 
     kPot3 port kPot3, 0.01   
     kProx port kProx, 0.01
-    if (kLDR < 600) then
+    if (kLDR < 600) then    ; LDR gives high/low outputs depending on light level, use this as an on/off switch
         kOn = 1
     else
         kOn = 0
     endif
     
-    outkc 3, 0, kPot1, 0, 1023
+    outkc 3, 0, kPot1, 0, 1023  ; Send control changes as MIDI to Pd
     outkc 4, 0, kPot2, 0, 1023
     outkc 5, 0, kPot3, 0, 1023
     outkc 6, 0, kProx, 0, 1023
@@ -121,21 +121,21 @@ instr arduino_serial
 endin
 
 instr delay
-; REF: http://www.csounds.com/manual/html/delayw.html
-abuf2	delayr	1
-adelL 	deltap	.4		;first tap (on left channel)
-adelM 	deltap	1		;second tap (on middle channel)
-	delayw	gaDelL + (adelL * 0.5)
+    ; REF: http://www.csounds.com/manual/html/delayw.html
+    abuf2 delayr 1
+    adelL deltap .4		;first tap (on left channel)
+    adelM deltap 1		;second tap (on middle channel)
+    delayw gaDelL + (adelL * 0.5)
 
-abuf3	delayr	1
-adelR 	deltap  .15	;one pitch changing tap (on the right chn.)
-	delayw	gaDelR + (adelR * 0.5)
-;make a mix of all deayed signals	
-	outs	adelL + adelM, adelR + adelM
+    abuf3 delayr 1
+    adelR deltap .15	;one pitch changing tap (on the right chn.)
+    delayw gaDelR + (adelR * 0.5)
+    ;make a mix of all deayed signals	
+    outs adelL + adelM, adelR + adelM
 
-clear gaDelL
-clear gaDelR
-endin
+    clear gaDelL
+    clear gaDelR
+    endin
 
 
 
@@ -157,7 +157,7 @@ instr mixer
     aNoiseL zar 13
     aNoiseR zar 14
 
-    ; Global reverb effect
+    ; Global reverb effect, set up by Rhys
     averbL,	averbR reverbsc gaverbL, gaverbR, 0.99, 800
     ; Sum the audio signals
     aLeft = (aDroneL * 0.2) + aSub + aPluckL + aSamplesL + aArpL + aFml + aBellL + aNoiseL + averbL

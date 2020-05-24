@@ -1,8 +1,8 @@
 
 ;---------------------SAWS---------------------
 instr drones
-    kOn zkr 7
-    kOn port kOn, 1
+    kOn zkr 7   ; Read the LDR on/off from Zak space
+    kOn port kOn, 1 ; Use the on/off as a multiplier for the volume - portamento creates a fade in or out
     kCents1 lfo 30, 0.1     ; Detune the saw waves against eachother slowly
     kCents2 lfo 30, 0.05
     kCents1 = cent(kCents1)
@@ -35,8 +35,8 @@ endin
 
 ;---------------------SUB---------------------
 instr sub
-    kOn zkr 7
-    kOn port kOn, 1
+    kOn zkr 7   ; Read the LDR on/off from Zak space
+    kOn port kOn, 1 ; Use the on/off as a multiplier for the volume - portamento creates a fade in or out
     ; LFO to modulate the sub's pitch, get the pitch from sensor value in Zak space and limit it
     kLfo lfo 5, 0.02    
     kFreq zkr 0
@@ -55,40 +55,44 @@ endin
 instr plucky
     iNote = cpsmidinn(p4)
     kFreq = cpsmidinn(p4) 
-    kAmp madsr 0.01, 0.1, 1, 2    
-    aSig1 pluck 0.5*kAmp, kFreq, iNote, p5, 6  
-    aSig2 pluck 0.5*kAmp, kFreq*1.5, iNote*1.5, p5, 1 ; Perfect fifth harmony
-    aHipass atone (aSig1 + aSig2), 250 
+    kAmp madsr 0.01, 0.1, 1, 2      ; Volume envelope  
+    aSig1 pluck 0.3*kAmp, kFreq, iNote, p5, 1  
+    aSig2 pluck 0.3*kAmp, kFreq*1.5, iNote*1.5, p5, 1 ; Perfect fifth harmony
+    if(p5 == 0) then    ; Random (noise) seed was turning out to be quieter...
+        aSig1 *= 2
+        aSig2 *= 2
+    endif   
+    aHipass atone (aSig1 + aSig2), 250 ; Filter out unnecessary frequencies and add reverb effect
     aRevL, aRevR reverbsc aHipass, aHipass, 0.8, 2000
     aRevL, aRevR stereoFilter aRevL, aRevR, 20000, 250
-    zawm (aRevL *p6) * 0.8, 3
+    zawm (aRevL * p6) * 0.8, 3
     zawm (aRevR * (1 - p6)) * 0.8, 4
     midion 1, p4, 100 ; Send the note to Pd to control visuals
 endin
 
 ;---------------------SAMPLES---------------------
 instr samples
-    kPot3 zkr 2
-    kPot3 *= 0.000977
-    kPitch scale kPot3, 2, 0.5
-    Spath = "../Samples/Sample"
+    kPot3 zkr 2 ; Read the value of Pot 3 from Zak space, turn it to a number between 1 and 0
+    kPot3 = kPot3 / 1023
+    kPitch scale kPot3, 2, 0.5  ; So we can scale it to control pitch - 0.5 is an octave lower, 2 is octave higher
+    Spath = "../Samples/Sample" ; This code concatenates a string that will be the sample and its path
     Sextension = ".wav"
     Sno sprintfk "%d", p4
     Spath strcat Spath, Sno
     Sfile strcat Spath, Sextension
     aSigl, aSigr diskin Sfile, kPitch   
     aSigl, aSigr reverbsc aSigl, aSigr, 0.5, 10000    
-    zaw aSigl, 5
-    zaw aSigr, 6
+    zaw aSigl * 1.5, 5
+    zaw aSigr * 1.5, 6
     vincr gaDelL, aSigl * 0.3
     vincr gaDelR, aSigr * 0.3
 endin
 
 ;---------------------ARP---------------------
 instr 123
-    iNote = p4
+    iNote = p4  ; Use pot 3 for transposing - note is i rate so we do not bend notes while they are playing
     kTranspose zkr 2
-    kTranspose *= 0.02346
+    kTranspose *= 0.02346   ; Scaling to get +24 midi notes, or 2 octaves
     kTranspose = int(kTranspose)
     iTranspose = i(kTranspose)
     iNote += iTranspose
@@ -96,12 +100,11 @@ instr 123
     
     kCutoff zkr 0
     kCutoff = kCutoff / 1023
-    kCutoff scale kCutoff, 10000, 600
+    kCutoff scale kCutoff, 10000, 600   ; Filter
     kCents = 10
     kCents = cent(kCents)
-
-    kEnv madsr 0.01, 0.01, 1, 0.28  
-    aSaw oscili 0.6*kEnv, (kFreq + kCents), giSaw
+    kEnv madsr 0.01, 0.01, 1, 0.28  ; Envelope for volume and filter
+    aSaw oscili 0.6*kEnv, (kFreq + kCents), giSaw   ; Saw and pulse waves, slightly detuned against eachother
     aPulse vco2 0.6*kEnv, (kFreq - kCents), 10
     aFilt lpf18 (aSaw + aPulse), kCutoff*kEnv, 0.5, 0.5
     aRevL, aRevR reverbsc aFilt, aFilt, 0.8, 2000
@@ -113,12 +116,7 @@ instr 123
 endin
 
 ;---------------------FM---------------------
-instr fm
-
-	;idur	=	p3
-	;ifreq	=	p4
-	;ifreq	=	440
-	;ipan	=	p5
+instr fm    ; Written by Rhys
     kFmFreq zkr 2
 	kEnv madsr 0.01, 0.01, 1, p3/2 ; An envelope for filter and amp
 	aSig1 vco2 kEnv, p4/2, 12   ; Two triangle waves
@@ -135,62 +133,33 @@ instr fm
 	gaverbR	= aFmR
     vincr gaDelL, aFmL * 0.02
     vincr gaDelR, aFmR * 0.02
-
 endin
 
 ;---------------------BELLS---------------------
-instr bell
-
-	iamp	=	p5
-    	ifreq	=	p4
-    	ipan	=	p6
-	kc1	=	p7
-	kc2	=	p8
-	kvdepth	=	p9
-	kvrate	=	p10
-
-    	asig fmbell iamp, ifreq*6, kc1, kc2, kvdepth, kvrate
-;asig fmbell iamp, ifreq, 3, 6, 0.2, 10
-
-
-	asig	atone	asig,	200
-
-	asig	*=	.1
-
-	apanL,	apanR	pan2	asig,	ipan
-    zawm apanL, 11
-    zawm apanR, 12
-
-	gaverbL	=	apanL*2
-	gaverbR	=	apanR*2
-         
+instr bell  ; Written by Rhys
+    aSig fmbell p5, p4*6, p7, p8, p9, p10   ; Opcode makes an FM bell sound
+	aSig atone aSig, 200    ; Filter low end out
+	aSig *= .1
+	aPanL, aPanR pan2 aSig, p6
+    zawm aPanL, 11
+    zawm aPanR, 12
+	gaverbL	= aPanL*2
+	gaverbR	= aPanR*2        
 endin
 
 ;---------------------NOISE---------------------
-instr noisey
-
-	idur	=	p3
-	ifreq	=	p4
-	ipan	=	p5
-	iamp	=	p6
-	ibeta	=	0.8
-	iband	=	p7
-
-	kenv	madsr	0.01,	idur,	0.35,	6	
-	asig	noise	0.6*kenv,	ibeta
-
-	asig	butbp	asig,	ifreq,	iband
-
-	asig	atone	asig,	80
-
-	anoiseL,	anoiseR    pan2	asig,	ipan
-    zawm anoiseL, 13
-    zawm anoiseR, 14
-	gaverbL	=	anoiseL*2
-	gaverbR	=	anoiseR*2
-    vincr gaDelL, anoiseL
-    vincr gaDelR, anoiseR
-	
+instr noisey    ; Written by Rhys
+	kEnv madsr 0.01, p3, 0.35, 6    ; Volume envelope	
+	aSig noise 0.6*kEnv, 0.8    ; Burst of noise, sent through band pass filtering with random centre frequencies
+	aSig butbp aSig, p4, p7
+	aSig atone aSig, 80
+	aNoiseL, aNoiseR pan2 aSig, p5
+    zawm aNoiseL, 13
+    zawm aNoiseR, 14
+	gaverbL	= aNoiseL*2
+	gaverbR	= aNoiseR*2
+    vincr gaDelL, aNoiseL
+    vincr gaDelR, aNoiseR	
 endin
 
 

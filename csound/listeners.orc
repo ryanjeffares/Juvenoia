@@ -1,7 +1,6 @@
 
 ;---------------------PLUCK TRIGGER---------------------
 instr pluck_listener
-    kOn zkr 7
     kPluckButton zkr 3  ; Read the value of the first button from zak space
     kPluckTrig trigger kPluckButton, 0, 0    ; Create a trigger when we press this
     kPluckTime init 0      
@@ -30,11 +29,10 @@ endin
 
 ;---------------------SAMPLE TRIGGER---------------------
 instr sample_listener
-    kOn zkr 7
     kSampleButton zkr 4
     kSampleTrig trigger kSampleButton, 0, 0
     if (kSampleTrig == 1) then         ; When we get a button press...
-        kSample randomOther 1, 7  ; Pick a random sample, not the same as the last one!
+        kSample randomOther 1, 10  ; Pick a random sample, not the same as the last one!
         event "i", "sampleTrigger", 0, 0.1, kSample    ; Schedule the event
     endif 
 endin
@@ -42,7 +40,7 @@ endin
 instr sampleTrigger
  ; This is weird but I was getting unwanted MIDI notes sent into Pd for some reason. 
  ; This instrument schedules and event for the sample player, sends over the number of the sample to Pd 
- ; then immediately turns off to prevent this
+ ; then immediately turns off to prevent the problem
     event "i", "samples", 0, 18, p4 
     midion 2, p4, 127
     turnoff
@@ -62,7 +60,8 @@ instr arp_listener
             kNote table kTablepos, 6
             event "i", 123, kTime, 0.01, kNote+24, kPan ; Schedule an event
             kTime += 0.15   ; Incrememnt the time and the table position
-            kTablepos += 1            
+            kTablepos += 1    
+            midion 8, kNote, 127         
             loop_lt iNdx, 1, kMax, loopstart    
     else    
         turnoff2 123, 0, 1     ; Turn the instrument off when the toggle gets turned off but let the last note release   
@@ -70,8 +69,8 @@ instr arp_listener
 endin
 
 ;---------------------FM TRIGGER---------------------
-instr fm_start
-    kOn zkr 7  
+instr fm_start  ; Written by Rhys
+    kOn zkr 7     ; Read our On/Off variable from Zak space
     kFmCnt init 0   ; Initialise a counter
 	if (kFmCnt>11) then ; Go back to 0 when we reach the max
 		kFmCnt = 0
@@ -85,15 +84,15 @@ instr fm_start
 	kFreq table	kFmCnt, 5
 	kFreq = cpspch(kFmOct+kFreq)
 
-	if (kFmCnt >= 0 && kOn == 1) then
+	if (kOn == 1) then ; If our LDR based variable is on...
 		schedkwhennamed	kTrig, 0, 0, "fm", 0, 3, kFreq,	kPan ; Schedule the event when the metro sends a bang
         kFmCnt += 1 ; Increment the counter
 	endif
 endin
 
 ;---------------------CHORD TRIGGER---------------------
-instr chord_start
-    kOn zkr 7
+instr chord_start   ; Written by Rhys
+    kOn zkr 7   ; Read our On/Off variable from Zak space
 	kRate rspline 5, 26, 0.1, 47	;spline for time
 	kRate scale kRate, 10, 0.3	;scaling spline
 	kTrig metro kRate, 0.00001	;metronome modulated by spline
@@ -139,7 +138,8 @@ instr chord_start
 	kVdepth rspline 0, 0.5, 0.01, 50
 	kVrate rspline 0, 0.7, 0.01, 50
     ; Schedule events
-    if (kOn == 1) then
+    if (kOn == 1) then ; If our LDR based variable is on...
+        ; Schedule events at different timings with the above variables
         schedkwhennamed	kTrig, 0, 4, "bell", 0, 10, kFreq1, kAmp, kPan,kC1, kC2, kVdepth, kVrate
         schedkwhennamed	kTrig, 0, 4, "bell", kVrate, 10, kFreq2, kAmp, kPan,kC1, kC2, kVdepth, kVrate
         schedkwhennamed	kTrig, 0, 4, "bell", kVdepth, 10, kFreq3, kAmp, kPan,kC1, kC2, kVdepth, kVrate
@@ -149,8 +149,7 @@ instr chord_start
     endif
 endin
 ;---------------------NOISE TRIGGER---------------------
-instr noise_start
-    kOn zkr 7
+instr noise_start   ; Written by Rhys
 	kRate rspline 0, 10, 0.2, 20    ; Randomly controlled metronome rate
 	kTrig metro kRate/8
 	kFilt random 500, 4000  ; Random frequency for filters, pan value, and amplitude
