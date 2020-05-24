@@ -14,7 +14,6 @@ gaverbL	init 0
 gaverbR	init 0   
 gaDelL init 0
 gaDelR init 0
-gkSample init 0 
 
 ; Gen table for Saw wave ref: http://iainmccurdy.org/CsoundRealtimeExamples/Cabbage/Instruments/Synths/HardSyncSynth.csd
 ; Faster than using saw wave mode in vco2

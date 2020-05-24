@@ -2,6 +2,8 @@
 int pot1 = 0;
 int pot2 = 1;
 int pot3 = 2;
+int prox = 3;
+int ldr = 4;
 
 // Digital pins
 const int button1 = 2;
@@ -15,6 +17,8 @@ byte pot3ID = 132;
 byte button1ID = 130;
 byte button2ID = 131;
 byte toggleID = 133;
+byte proxID = 134;
+byte ldrID = 135;
 
 // Value to toggle between inputs
 int select;
@@ -92,15 +96,25 @@ void loop()
           serial_send(toggleID, toggleVal);
           break;
          }
+         case 6: {
+          int proxVal = analogRead(prox);
+          serial_send(proxID, proxVal);
+          break;
+         }
+         case 7: {
+          int ldrVal = analogRead(ldr);
+          serial_send(ldrID, ldrVal);
+          break;
+         }
        }
 
        // Update the select
-       select = (select+1)%6;
+       select = (select+1)%8;
   }    
 }
 
 // keep Csound’s k rate high enough to allow for five bytes to be sent over serial:
-//the trigger from Csound, ID, length, value 1, and value 2. For 10 bit integers,
-//this can be calculated by dividing five of these bytes by the baud rate of 9600,
-//so 50/9600 which is about 5.2 milliseconds. At a k-rate of 256 at a sample rate of 44100 kHz,
-//a k-cycle happens every 5.8 milliseconds (256/44100), so this allows enough time to read all the bytes necessary.
+// the trigger from Csound, ID, length, value 1, and value 2. For 10 bit integers,
+// this can be calculated by dividing five of these bytes by the baud rate of 9600,
+// so 50/9600 which is about 5.2 milliseconds. At a k-rate of 256 at a sample rate of 44100 kHz,
+// a k-cycle happens every 5.8 milliseconds (256/44100), so this allows enough time to read all the bytes necessary.

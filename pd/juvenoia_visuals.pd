@@ -302,7 +302,7 @@ you;
 #X obj 1018 491 colorRGB;
 #X obj 1018 593 rectangle 2 1.5;
 #X obj 1131 367 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 11694 1;
+-1 -1 12600 1;
 #X obj 1018 515 alpha;
 #X obj 1128 434 r pot1;
 #X obj 1178 434 r pot2;
