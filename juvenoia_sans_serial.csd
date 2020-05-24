@@ -4,7 +4,7 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
--odac:sysdefault:CARD=USB ;-j2
+-odac:sysdefault:CARD=USB -j2
 -M hw:1,1
 </CsOptions>
 <CsInstruments>
@@ -16,14 +16,13 @@ nchnls = 2
 
 seed	0	;ensures random values are different each time by getting a seed from CPU
 
-insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14,	4;,	2
+insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14,	4
 
 icnt init 0
 
 instr globals    ;initialising global variables
 
-	gkpot2 init 0
-    gkpot init 60
+    gkpot  init 0
     gkpres init 0
     gkbut1 init 0
     gkbut2 init 0
@@ -90,28 +89,6 @@ alwayson	"reverb"
 ;alwayson "noise_start"
 ;alwayson "midi"
 
-
-/*
-instr delay
-
-	ktime	rspline	0.1,	3,	1,	20
-
-	asig1	deltap	0.75*ktime
-	asig2	deltap	(1*ktime)
-	asig3	deltap	1.5*ktime
-
-	asig	=	asig1+(asig2*.5)+(asig3*.25)
-
-
-		outs	asig,	asig
-
-	gadel	=	0
-	gaverbL	=	asig
-	gaverbR	=	asig
-
-endin
-*/
-
 instr reverb
 
 	gaverboutL	init	0
@@ -124,23 +101,7 @@ instr reverb
 	gaverbR	=	0
 
 endin
-/*
-instr mixer
 
-    ksaw1pan chnget "saw1pan"
-    ksaw2pan chnget "saw2pan"
-
-    outs ((gasaw1*(1-ksaw1pan)) + (gasaw2*(1-ksaw2pan)) + ((gasub*0.2))*0.3) + gachordsL + gafmL + gasamplesL + ganoiseL + gaverboutL, ((gasaw1*ksaw1pan) + (gasaw2*ksaw2pan) + ((gasub*0.2))*0.3) + gachordsR + gafmR + gasamplesR + ganoiseR + gaverboutR
-
-    amasterl = ((gasaw1*(1-ksaw1pan)) + (gasaw2*(1-ksaw2pan)) + ((gasub*0.2))*0.3) + gachordsL + gafmL + gasamplesL + ganoiseL
-    amasterr = ((gasaw1*ksaw1pan) + (gasaw2*ksaw2pan) + ((gasub*0.2))*0.3) + gachordsR + gafmR + gasamplesR + ganoiseR
-    kmasterlrms rms amasterl
-    kmasterrrms rms amasterr
-    chnset kmasterlrms, "masterl"
-    chnset kmasterrrms, "masterr"
-
-endin
-*/
 </CsInstruments>
 <CsScore>
 ;causes Csound to run for about 7000 years...
@@ -152,6 +113,5 @@ f2 0 16384 10 1 0.5 0.3 0.25 0.2 0.167 0.14 0.125 .111
 f3 0 16384 10 1 0 0.3 0 0.2 0 0.14 0 .111
 f4 0 7 -2 60 62 64 65 67 69 71
 f5 0 12	-2 65 61 60	67 70 63 64	66 71 62 69	68
-f6 0 8192 1 "Samples/mandpluk.aiff" 0 0 0
 </CsScore>
 </CsoundSynthesizer>
