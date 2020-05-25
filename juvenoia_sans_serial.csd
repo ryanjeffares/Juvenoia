@@ -13,12 +13,13 @@ nchnls = 2
 
 seed	0	;ensures random values are different each time by getting a seed from CPU
 
-insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14,	4,	6,	7
+insremot	"192.168.1.64",	"192.168.1.65",	10,	14,	4,	6,	7
 
 icnt init 0
 
 instr globals    ;initialising global variables
 
+gkpot1	init	0
 gkpot2 init 0
     gkpot  init 0
     gkpres init 0
@@ -72,7 +73,7 @@ endin
 schedule("globals",0,2)
 
 ;alwayson "globals"
-alwayson "saw1"
+;alwayson "saw1"
 ;alwayson "saw2"
 ;alwayson "mixer"
 ;alwayson "sub"
