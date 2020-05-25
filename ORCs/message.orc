@@ -1,7 +1,7 @@
 instr message
 
-    ktrig trigger gkbutton1, 0, 0
-    ktrig2 trigger gkbutton2, 0, 0
+    ktrig trigger gkbut1, 0, 0
+    ktrig2 trigger gkbut2, 0, 0
 
     klength random 0.5, 2  
     ktime init 0  
@@ -27,9 +27,9 @@ instr message
             endif 
             
             knote table krand, 4
-            event "i", "plucky", ktime, 0.5, (knote+kadd), ktable, kpan
-            event "i", "plucky2", ktime, 0.5, (knote+kadd+5), ktable, kpan
-            ktime += 0.1
+            event "i", "plucky", ktime, 3, (knote+kadd), ktable, kpan
+ ;           event "i", "plucky2", ktime, 0.5, (knote+kadd+5), ktable, kpan
+            ktime += 0.75
             od
     
         ktime = 0    
@@ -64,7 +64,8 @@ instr plucky
     kfreq = cpsmidinn(kfreq) 
     kamp madsr 0.01, 0.1, 1, 2    
     asig pluck 0.5*kamp, kfreq, inote, ifn, 6   
-    ahipass atone asig, 250 
+	ahipass	=	asig  
+;  ahipass atone asig, 250 
     arev, arev reverbsc ahipass, ahipass, 0.8, 2000
     afilt atone arev, 250
     outs (afilt*kpan)*0.8, (afilt*(1-kpan))*0.8
