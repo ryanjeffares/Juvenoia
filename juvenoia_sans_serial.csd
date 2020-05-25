@@ -4,7 +4,7 @@ will become redundant eventually*/
 
 <CsoundSynthesizer>
 <CsOptions>
--odac:sysdefault:CARD=USB -j2
+-odac:sysdefault:CARD=USB ;-j2
 -M hw:1,1
 </CsOptions>
 <CsInstruments>
@@ -16,12 +16,13 @@ nchnls = 2
 
 seed	0	;ensures random values are different each time by getting a seed from CPU
 
-insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14,	4
+insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14,	4,	6,	7
 
 icnt init 0
 
 instr globals    ;initialising global variables
 
+gkpot2 init 0
     gkpot  init 0
     gkpres init 0
     gkbut1 init 0
@@ -81,7 +82,7 @@ alwayson "saw1"
 ;alwayson "saw2"
 ;alwayson "mixer"
 ;alwayson "sub"
-;alwayson "message"
+alwayson "message"
 ;alwayson "start_notes"
 alwayson	"reverb"
 ;alwayson	"delay"
