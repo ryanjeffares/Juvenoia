@@ -1,7 +1,7 @@
-#N canvas 429 291 236 157 12;
-#N canvas 331 106 217 445 duino 0;
+#N canvas 249 245 236 157 12;
+#N canvas 99 110 217 445 duino 0;
 #X obj 18 241 route digital analog;
-#X obj 86 268 route 0 1;
+#X obj 96 268 route 0 1;
 #X msg 94 156 pinMode 14 2;
 #X msg 94 133 pinMode 15 2;
 #X msg 94 83 pinMode 2 0;
@@ -9,13 +9,13 @@
 #X obj 94 59 delay 2000;
 #X msg 18 62 open 0;
 #X obj 18 15 loadbang;
-#X obj 48 350 s but2;
+#X obj 52 353 s but2;
 #X obj 18 401 s but1;
 #X obj 18 214 pduino/arduino;
-#X obj 48 323 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 52 326 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 86 323 s pressure;
-#X obj 116 294 s pot;
+#X obj 97 329 s pressure;
+#X obj 130 294 s pot;
 #X floatatom 18 376 5 0 0 0 - - -, f 5;
 #X obj 18 298 route 2 3;
 #X msg 37 115 devices;
@@ -41,7 +41,7 @@
 #X connect 16 1 12 0;
 #X connect 17 0 11 0;
 #X restore 18 16 pd duino;
-#N canvas 111 188 283 309 midi 1;
+#N canvas 107 240 283 309 midi 0;
 #X obj 144 106 r pot;
 #X obj 10 106 r pressure;
 #X obj 9 9 r but1;
@@ -51,7 +51,6 @@
 #X obj 144 159 int;
 #X obj 10 156 int;
 #X obj 10 131 * 508;
-#X text 9 273 pot & pressure scaled between 0 & 127;
 #X obj 29 70 noteout 1;
 #X obj 169 69 noteout 2;
 #X obj 47 239 noteout 3;
@@ -64,20 +63,20 @@
 #X connect 0 0 4 0;
 #X connect 0 0 4 0;
 #X connect 1 0 8 0;
-#X connect 2 0 16 0;
-#X connect 3 0 18 0;
+#X connect 2 0 15 0;
+#X connect 3 0 17 0;
 #X connect 4 0 6 0;
 #X connect 6 0 5 0;
-#X connect 7 0 13 0;
+#X connect 7 0 12 0;
 #X connect 8 0 7 0;
-#X connect 15 0 14 0;
-#X connect 15 1 14 1;
-#X connect 16 0 10 0;
-#X connect 16 1 10 1;
-#X connect 17 0 12 0;
-#X connect 17 1 12 1;
-#X connect 18 0 11 0;
-#X connect 18 1 11 1;
+#X connect 14 0 13 0;
+#X connect 14 1 13 1;
+#X connect 15 0 9 0;
+#X connect 15 1 9 1;
+#X connect 16 0 11 0;
+#X connect 16 1 11 1;
+#X connect 17 0 10 0;
+#X connect 17 1 10 1;
 #X restore 19 56 pd midi;
 #X text 17 129 Rhys Mayes - 2020;
 #X obj 125 24 loadbang;

@@ -14,12 +14,13 @@ nchnls = 2
 
 seed	0	;ensures random values are different each time by getting a seed from CPU
 
-insremot	"192.168.1.64",	"192.168.1.65",	10,	12,	14,	4,	6,	7;,	2
+insremot	"192.168.1.64",	"192.168.1.65",	10,	14,	4,	6,	7;,	2
 
 icnt init 0
 
 instr globals    ;initialising global variables
 
+gkpot1	init	0
     gkpot init 0
 	gkpres init 0
     gkpot2 init 0
@@ -56,8 +57,6 @@ endin
 
 
 #include "ORCs/midiin.orc"
-
-#include "ORCs/ardnocabbage.orc"
 
 #include "ORCs/sub.orc"
 

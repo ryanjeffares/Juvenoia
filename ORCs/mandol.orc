@@ -31,17 +31,16 @@ instr start_notes
 	;---------------MULTIPLICATION---------------
 
 
-	;kfreqmult	=	gkmultiply-kfreq
-	;kfreq		=	kfreqmult
-	;kfreq		=	gkmultiply
-	;kfreq		round	kfreq
+	kfreqmult	=	gkmultiply-kfreq
+	kfreq		=	kfreqmult
+	kfreq		=	gkmultiply
+	kfreq		round	kfreq
 
 	;--------------------END---------------------
 	
 
 	if(kcnt>=0)	then
 
-		;printk2	kmidi,	10
 		kcnt	=	kcnt+1
 		schedkwhennamed	ktrig,	0,	0,	"mando",	4,	2,	kfreq,	kpan
 
@@ -49,22 +48,16 @@ instr start_notes
 
 endin
 
-;gitable	ftgen	6, 0, 8192, 1, "Samples/mandpluk.aiff", 0, 0, 0
-
-
 instr mando
 
 	idur	=	p3
 	ifreq	=	p4
-	;ifreq	=	440
 	ipan	=	p5
 	iamp	random	0.1,	0.6
 
 	kenv	madsr	0.05,	idur*0.6,	0.4,	2
 
 	asig	vco2	iamp*kenv,	ifreq,	12
-
-;	asig	atone	asig,	100
 
 	apanL,	apanR   pan2	asig,	ipan
 	

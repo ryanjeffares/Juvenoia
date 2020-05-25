@@ -38,6 +38,8 @@ gkpot2 init 0
     if(gkcutoff < 20) then
         gkcutoff = 20
     endif    
+	
+	gkpitchcps init 0
 
     gaverbL	init	0
     gaverbR	init	0    
@@ -56,6 +58,8 @@ endin
 
 #include "ORCs/midiin.orc"
 
+#include "ORCs/pitch.orc"
+
 #include "ORCs/sub.orc"
 
 #include "ORCs/saws.orc"
@@ -72,18 +76,12 @@ endin
 
 schedule("globals",0,2)
 
-;alwayson "globals"
-;alwayson "saw1"
-;alwayson "saw2"
-;alwayson "mixer"
-;alwayson "sub"
+alwayson "pitch"
+alwayson "saw1"
 alwayson "message"
-;alwayson "start_notes"
-alwayson	"reverb"
-;alwayson	"delay"
-;alwayson "chord_start"
+alwayson "start_notes"
+alwayson "reverb"
 ;alwayson "noise_start"
-;alwayson "midi"
 
 instr reverb
 

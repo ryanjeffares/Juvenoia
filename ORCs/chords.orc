@@ -2,8 +2,6 @@
 
 instr chord_start
 
-;	itrig	init	1
-
 	ipan	random	0,	1
 	iamp	random	0,	1
 	ipres	random	1,	5
@@ -33,10 +31,9 @@ instr chord_start
 	ivdepth	random	0,	0.5
 	ivrate	random	0,	0.7
 	
-	schedule	"glass",	4,	10,	ifreq1,	iamp,	ipan ;,	ic1,	ic2,	ivdepth,	ivrate
-	schedule	"glass",	4+ivdepth,	10,	ifreq2,	iamp,	ipan ;,	ic1,	ic2,	ivdepth,	ivrate
-	schedule	"glass",	4+ivrate,	10,	ifreq3,	iamp,	ipan ;,	ic1,	ic2,	ivdepth,	ivrate
-
+	schedule	"glass",	4,	10,	ifreq1,	iamp,	ipan 
+	schedule	"glass",	4+ivdepth,	10,	ifreq2,	iamp,	ipan
+	schedule	"glass",	4+ivrate,	10,	ifreq3,	iamp,	ipan 
 endin
 
 instr glass
@@ -44,21 +41,14 @@ instr glass
 	idur	=	p3
 	iamp	=	p5
     	ifreq	=	p4
-    	ipan	=	p6/*
-	kc1	=	p7
-	kc2	=	p8
-	kvdepth	=	p9
-	kvrate	=	p10
-*/
-;    	asig fmbell iamp, ifreq*6, kc1, kc2, kvdepth, kvrate
-;asig fmbell iamp, ifreq, 3, 6, 0.2, 10
+    	ipan	=	p6
 
-	kenv	madsr	0.01,	idur*0.75,	0.6,	2
+	kenv	madsr	0.01,	idur*0.5,	0.3,	2
 	asig oscil iamp*kenv,	ifreq
 
 	asig	atone	asig,	200
 
-;	asig	*=	.1
+	asig	*=	.1
 
 	apanL,	apanR	pan2	asig,	ipan
 
@@ -66,8 +56,8 @@ instr glass
 		outs	apanL,	apanR
 
 
-	gaverbL	=	apanL*2
-	gaverbR	=	apanR*2
+	gaverbL	=	apanL*1.5
+	gaverbR	=	apanR*1.5
          
 endin
 
