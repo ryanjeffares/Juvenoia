@@ -64,13 +64,8 @@ instr plucky
     kfreq = cpsmidinn(kfreq) 
     kamp madsr 0.01, 0.1, 1, 2    
     asig pluck 0.5*kamp, kfreq, inote, ifn, 6   
-<<<<<<< HEAD
-	ahipass	=	asig
-;    ahipass atone asig, 250 
-=======
 	ahipass	=	asig  
 ;  ahipass atone asig, 250 
->>>>>>> 8b81150ca6382dca49ca0934ad345b68f19cd71a
     arev, arev reverbsc ahipass, ahipass, 0.8, 2000
     afilt atone arev, 250
     outs (afilt*kpan)*0.8, (afilt*(1-kpan))*0.8

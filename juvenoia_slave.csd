@@ -16,7 +16,7 @@ nchnls = 2
 
 seed	0	;ensures random values are different each time by getting a seed from CPU
 
-insremot	"192.168.0.66",	"192.168.0.67",	10,	12,	14,	4,	6,	7;,	2
+insremot	"192.168.1.64",	"192.168.1.65",	10,	12,	14,	4,	6,	7;,	2
 
 icnt init 0
 
