@@ -1,3 +1,5 @@
+;					Rhys Mayes - 2019
+
 instr start_notes
 
  	kcnt	init	0

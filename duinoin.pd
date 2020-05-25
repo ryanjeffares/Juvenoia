@@ -1,4 +1,4 @@
-#N canvas 732 130 171 157 12;
+#N canvas 649 111 171 157 12;
 #N canvas 973 289 217 445 duino 1;
 #X obj 18 241 route digital analog;
 #X obj 86 268 route 0 1;
@@ -38,7 +38,7 @@
 #X connect 15 0 10 0;
 #X connect 16 0 15 0;
 #X connect 16 1 12 0;
-#X restore 37 32 pd duino;
+#X restore 18 16 pd duino;
 #N canvas 634 379 283 309 midi 1;
 #X obj 144 106 r pot;
 #X obj 10 106 r pressure;
@@ -78,4 +78,5 @@
 #X connect 17 1 12 1;
 #X connect 18 0 11 0;
 #X connect 18 1 11 1;
-#X restore 43 80 pd midi;
+#X restore 19 56 pd midi;
+#X text 17 129 Rhys Mayes - 2020;

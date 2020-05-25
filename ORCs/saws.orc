@@ -1,3 +1,5 @@
+;					Ryan Jeffares - 2020
+
 instr saw1
 
     kfreq = gkpot*4 ;/4

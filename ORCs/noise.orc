@@ -1,3 +1,5 @@
+;					Rhys Mayes - 2019
+
 instr noise_start
 
 	krate	rspline	0.005,	0.7,	0.2,	20

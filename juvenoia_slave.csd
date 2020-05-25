@@ -1,6 +1,4 @@
-/*	This CSD is for debugging on the PowerMac due to a lack of serial opcodes and cabbage
-
-will become redundant eventually*/
+;				Ryan Jeffares & Rhys Mayes - 2020
 
 <CsoundSynthesizer>
 <CsOptions>
