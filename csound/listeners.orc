@@ -159,4 +159,3 @@ instr noise_start   ; Written by Rhys
     ; Schedule the event when the metro sends a bang
     schedkwhennamed	kTrig, 0, 0, "noisey", 0, 0.5, kFilt, kPan, kAmp, kBand
 endin
-

@@ -75,11 +75,11 @@ instr samples
     kPot3 zkr 2 ; Read the value of Pot 3 from Zak space, turn it to a number between 1 and 0
     kPot3 = kPot3 / 1023
     kPitch scale kPot3, 2, 0.5  ; So we can scale it to control pitch - 0.5 is an octave lower, 2 is octave higher
-    Spath = "../Samples/Sample" ; This code concatenates a string that will be the sample and its path
-    Sextension = ".wav"
-    Sno sprintfk "%d", p4
-    Spath strcat Spath, Sno
-    Sfile strcat Spath, Sextension
+    ;Spath = "../Samples/Sample"
+    ;Sextension = ".wav"
+    Sno sprintfk "%d", p4 ; This code concatenates a string that will be the sample and its path
+    Spath strcat "../Samples/Sample", Sno
+    Sfile strcat Spath, ".wav"
     aSigl, aSigr diskin Sfile, kPitch   
     aSigl, aSigr reverbsc aSigl, aSigr, 0.5, 10000    
     zaw aSigl * 1.5, 5
@@ -161,6 +161,3 @@ instr noisey    ; Written by Rhys
     vincr gaDelL, aNoiseL
     vincr gaDelR, aNoiseR	
 endin
-
-
-

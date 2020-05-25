@@ -48,5 +48,3 @@ opcode stereoFilter, aa, aakk
     aRightFiltered clfilt aRightFiltered, kHPCut, 1, 20
     xout aLeftFiltered, aRightFiltered
 endop
-
-
