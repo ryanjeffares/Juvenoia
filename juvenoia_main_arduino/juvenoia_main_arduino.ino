@@ -1,3 +1,5 @@
+//					Ryan Jeffares - 2019
+
 // Analog pins
 int pot1 = 0;
 int pot2 = 1;

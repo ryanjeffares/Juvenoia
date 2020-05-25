@@ -1,3 +1,5 @@
+;					Ryan Jeffares - 2019
+
 instr message
 
     ktrig trigger gkbut1, 0, 0

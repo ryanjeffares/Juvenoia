@@ -1,7 +1,4 @@
-/*	This CSD is for debugging on the PowerMac due to a lack of serial opcodes and cabbage
-
-will become redundant eventually*/
-
+;				Rhys Mayes & Ryan Jeffares - 2019/20
 <CsoundSynthesizer>
 <CsOptions>
 -odac:sysdefault:CARD=USB ;-j2
@@ -58,8 +55,6 @@ endin
 
 #include "ORCs/midiin.orc"
 
-#include "ORCs/ardnocabbage.orc"
-
 #include "ORCs/sub.orc"
 
 #include "ORCs/saws.orc"
@@ -77,7 +72,6 @@ endin
 schedule("globals",0,2)
 
 ;alwayson "globals"
-alwayson "arduino_serial2"
 alwayson "saw1"
 ;alwayson "saw2"
 ;alwayson "mixer"
