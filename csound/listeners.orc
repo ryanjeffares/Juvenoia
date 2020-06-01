@@ -32,7 +32,7 @@ instr sample_listener
     kSampleButton zkr 4
     kSampleTrig trigger kSampleButton, 0, 0
     if (kSampleTrig == 1) then         ; When we get a button press...
-        kSample randomOther 1, 10  ; Pick a random sample, not the same as the last one!
+        kSample randomOther 1, 9  ; Pick a random sample, not the same as the last one!
         event "i", "sampleTrigger", 0, 0.1, kSample    ; Schedule the event
     endif 
 endin

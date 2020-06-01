@@ -75,8 +75,6 @@ instr samples
     kPot3 zkr 2 ; Read the value of Pot 3 from Zak space, turn it to a number between 1 and 0
     kPot3 = kPot3 / 1023
     kPitch scale kPot3, 2, 0.5  ; So we can scale it to control pitch - 0.5 is an octave lower, 2 is octave higher
-    ;Spath = "../Samples/Sample"
-    ;Sextension = ".wav"
     Sno sprintfk "%d", p4 ; This code concatenates a string that will be the sample and its path
     Spath strcat "../Samples/Sample", Sno
     Sfile strcat Spath, ".wav"
@@ -119,14 +117,15 @@ endin
 instr fm    ; Written by Rhys
     kFmFreq zkr 2
 	kEnv madsr 0.01, 0.01, 1, p3/2 ; An envelope for filter and amp
-	aSig1 vco2 kEnv, p4/2, 12   ; Two triangle waves
-	aSig2 vco2 kEnv, (kFmFreq + 20) / 2, 12
+	aSig1 oscil kEnv, p4 ; Sine wave
+	aSig2 vco2 kEnv, (kFmFreq + 20), 10 ; Pulse wave
 	aSig = aSig1 * aSig2        ; Multiple the two audio signals for FM synthesis
 	aSig lpf18 aSig, 4000*kEnv, .2, .8  ; Filtering
 	aSig atone aSig, 100
 	aFmL, aFmR pan2 aSig, p5    ; Panning
-	aFmL *= 0.25    ; Attenuation
-	aFmR *= 0.25
+    aFmL, aFmR reverbsc aFmL, aFmR, 0.8, 2000
+	aFmL *= 0.15    ; Attenuation
+	aFmR *= 0.15
     zawm aFmL, 9    ; Write audio to Zak space
     zawm aFmR, 10
 	gaverbL	= aFmL  ; Reverb and delay sends
@@ -135,7 +134,7 @@ instr fm    ; Written by Rhys
     vincr gaDelR, aFmR * 0.02
 endin
 
-;---------------------BELLS---------------------
+;---------------------CHORDS---------------------
 instr bell  ; Written by Rhys
     aSig fmbell p5, p4*6, p7, p8, p9, p10   ; Opcode makes an FM bell sound
 	aSig atone aSig, 200    ; Filter low end out

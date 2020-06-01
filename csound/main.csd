@@ -1,6 +1,6 @@
 <CsoundSynthesizer>
 <CsOptions>
--odac -Q0
+-odac2 -Q0
 </CsOptions>
 <CsInstruments>
 
@@ -59,7 +59,7 @@ instr arduino_serial
     kLDR init 0
     kOn init 0
 
-    iPort serialBegin "/dev/cu.usbmodem142301", 9600	;connect to the arduino with baudrate = 9600
+    iPort serialBegin "/dev/cu.usbmodem141201", 9600	;connect to the arduino with baudrate = 9600
     serialWrite iPort, 1		;Triggering the Arduino (k-rate)
     kValue = 0 
     kType serialRead iPort		; Read type of ID we assigned to the sensor
@@ -96,7 +96,7 @@ instr arduino_serial
     kPot2 port kPot2, 0.01 
     kPot3 port kPot3, 0.01   
     kProx port kProx, 0.01
-    if (kLDR < 600) then    ; LDR gives high/low outputs depending on light level, use this as an on/off switch
+    if (kLDR > 700) then    ; LDR gives high/low outputs depending on light level, use this as an on/off switch
         kOn = 1
     else
         kOn = 0
@@ -171,6 +171,7 @@ endin
 
 </CsInstruments>
 <CsScore>
+f0 z ; Dummy table to keep the score running for about 7000 years...
 ; F tables for waveforms and notes
 f1 0 16384 10 1
 f2 0 16384 10 1 0.5 0.3 0.25 0.2 0.167 0.14 0.125 .111
